@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Traços Server
 Project containing the Traços server.
@@ -107,3 +108,6 @@ Ex: `git commit -m "Feat(32): Created user migrations and tables"`
 * **Yasmin Adrieny** - *Developer / Tester / QA* - [AdrySales](https://github.com/AdrySales)
 * **José Luiz** - *Developer / PO* - [jldsn](https://github.com/jldsn)
 
+=======
+# backend-tracos
+>>>>>>> main
