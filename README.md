@@ -1,38 +1,22 @@
 # Traços Server
 Project containing the Traços server.
 
-Traços is a project that aims to give more visibility to tattoo artists. This is a project created with [FastAPI](https://fastapi.tiangolo.com/).
+Traços is a project that aims to give more visibility to tattoo artists. This is a project created with [Express](https://expressjs.com/pt-br/).
 
 ## Links
 + [Mockup]()
 + [Documentation](https://drive.google.com/drive/folders/1RIkaG9tr3MUFPjsY2Bi3DlVSgBk0n8Lz?usp=sharing)
 
-## Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
 ### Prerequisites
-First, ensure you have Python 3.7 or higher installed on your machine. You can download the latest version of Python from the official [website](https://www.python.org/downloads/).
 
-It’s a good practice to use a virtual environment to manage your project’s dependencies. You can use venv (included with Python) or virtualenv. Here's how to create a virtual environment using venv:
-
-1. Step 1: Install a virtual environment tool
+1. Run this command to download the current stable release of Docker Compose:
 ```bash
-    # Create a virtual environment named ".venv"
-    python -m venv .venv
-
-    # Activate the virtual environment
-    # On Windows:
-    .venv\Scripts\activate
-    # On macOS and Linux:
-    source .venv/bin/activate
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
 
-2. Step2: Install FastAPI and Uvicorn.
-
-FastAPI needs an ASGI server to run, and Uvicorn is a popular choice. You can install both FastAPI and Uvicorn using pip:
-
+2. Apply executable permissions to the binary:
 ```bash
-    pip install fastapi uvicorn
+sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ### Installing
@@ -43,35 +27,47 @@ To run the project for the **first** time you must follow this steps:
 git clone git@github.com:labprogsam/backend-tracos.git
 ```
 
-2. Install the dependencies
-```bash
-pip install -r requirements.txt
-```
-
-3. Create **.env** file and copy the following content to it
+2. Create **.env** file and copy the following content to it
 
 ```dotenv
 # Application settings
 
-PORT = 8000
+PORT=8001
 
+# Database settings
+DB_PORT=5432
+DB_HOST=localhost
+DB_USER=postgres
+DB_PASS=postgres
+DB_NAME=postgres
+
+```
+
+3. Install the dependencies, create a local database and run the migrations
+```bash
+npm i
+```
+
+```bash
+docker-compose up -d --build
+```
+
+```bash
+npm run migration
 ```
 
 ## Running the project
 To run the project (if already installed), just follow this simple command on the client directory:
 
 ```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+npm run dev
 ```
 
-- main:app refers to the app instance in your main.py file.
-- --reload makes the server restart after code changes, which is useful during development.
-
-> Open your web browser and go to http://127.0.0.1:8000. You should see a JSON response: {"Hello": "World"}.
-
 ## Built With
-* **FastAPI**
-* **Postgres**
+* **Node.js**
+* **Express.js**
+* **Javascript**
+* **PostgreSQL**
 
 ## GitHub
 
