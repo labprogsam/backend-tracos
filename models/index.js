@@ -1,6 +1,6 @@
 import Task from './taskModel.js';
-import Usuario from './usuarioModel.js';
+import Users from './userModel.js';
 export {
   Task,
-  Usuario,
+  Users,
 };
