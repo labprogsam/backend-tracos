@@ -8,7 +8,8 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "migration": "npx sequelize db:migrate",
     "undo": "npx sequelize db:migrate:undo"
   },
