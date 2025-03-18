@@ -13,6 +13,12 @@ const dbConfig = {
     underscored: true,
   },
   logging: false,
+  dialectOptions: {
+    ssl: {
+      require: true, // Exige SSL
+      rejectUnauthorized: false, // Pode ser útil em casos com certificados autoassinados
+    },
+  },
 };
 
 export default dbConfig;
