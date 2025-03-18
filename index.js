@@ -1,22 +1,22 @@
-import 'dotenv/config';
+import express from 'express';
+import { TasksRoute, usuarioRoute } from './routes/index.js'; // Importa as rotas
+import sequelize from './database/index.js';
 
-import app from './app.js';
-import database from './database/index.js';
+const app = express();
 
+app.use(express.json()); // Permite o uso de JSON no corpo das requisições
 
-// ================ DATABASE ================ //
-database
+// Define as rotas
+app.use('/api/tasks', TasksRoute);  // Para as tarefas
+app.use('/api', usuarioRoute);      // Para os usuários
+
+// Conexão com o banco
+sequelize
   .authenticate()
-  .then(() => {
-    console.log('Connection to the database established successfully');
-  })
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  });
+  .then(() => console.log('Connection to the database established successfully'))
+  .catch(err => console.error('Unable to connect to the database:', err));
 
-// ================ RUN SERVER ================ //
-const port = process.env.PORT || 8001;
-
-app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port: ${PORT}`);
 });
