@@ -1,5 +1,5 @@
 import express from 'express';
-import { TasksRoute, usuarioRoute } from './routes/index.js'; // Importa as rotas
+import { TasksRoute, usersRoutes } from './routes/index.js'; // Importa as rotas
 import sequelize from './database/index.js';
 
 const app = express();
@@ -8,7 +8,7 @@ app.use(express.json()); // Permite o uso de JSON no corpo das requisições
 
 // Define as rotas
 app.use('/api/tasks', TasksRoute);  // Para as tarefas
-app.use('/api', usuarioRoute);      // Para os usuários
+app.use('/api', usersRoutes);      // Para os usuários
 
 // Conexão com o banco
 sequelize
