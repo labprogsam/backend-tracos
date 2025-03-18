@@ -1,11 +1,11 @@
 // models/Usuario.js
 import { Model, DataTypes } from "sequelize";
 
-class Usuario extends Model {
+class User extends Model {
   static init(sequelize) {
     super.init(
       {
-        nome: {
+        name: {
           type: DataTypes.STRING,
           allowNull: false,
         },
@@ -13,15 +13,15 @@ class Usuario extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        senha: {
+        password: {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        tipo: {
+        type: {
           type: DataTypes.BOOLEAN,
           allowNull: false,
         },
-        foto_perfil: {
+        profile_photo: {
           type: DataTypes.STRING,
           allowNull: true,
         },
@@ -40,7 +40,7 @@ class Usuario extends Model {
       },
       {
         sequelize,
-        tableName: "usuario",
+        tableName: "users",
         timestamps: false,
         underscored: false,
       }
@@ -48,5 +48,5 @@ class Usuario extends Model {
   }
 }
 
-export default Usuario;
+export default User;
 
