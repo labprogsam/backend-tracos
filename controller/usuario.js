@@ -1,6 +1,5 @@
 // controllers/UsuarioController.js
-import Usuario from "../models/usuarioModel";
-import { Op } from "sequelize";
+import Usuario from "../models/usuarioModel.js";
 
 export default {
   async create(req, res) {
