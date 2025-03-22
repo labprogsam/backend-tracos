@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 
 import { errorHandler, requestHandler, notFoundHandler } from './handlers/index.js';
-import taskRoutes from './routes/taskRoute.js';
+import { usersRoutes } from './routes/index.js';
 
 // ================ APPLICATION ================ //
 const app = express();
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // ------------ ROUTES ------------ //
-app.use(taskRoutes);
+app.use(usersRoutes);
 
 // ================ HANDLERS ================ //
 app.use(errorHandler);

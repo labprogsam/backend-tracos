@@ -1,26 +1,31 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Tasks', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('Users', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
-    titulo: {
+    name: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    descricao: {
+    email: {
       type: Sequelize.STRING,
-      allowNull: true,
+      allowNull: false,
+      unique: true,
     },
-    status: {
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    type: {
       type: Sequelize.ENUM,
-      values: ['pendente', 'realizando', 'concluída'],
+      values: ['TATUADOR', 'CLIENTE'],
       allowNull: false,
     },
-    data_vencimento: {
-      type: Sequelize.DATE,
+    profile_photo: {
+      type: Sequelize.STRING,
       allowNull: true,
     },
     createdAt: {
@@ -31,7 +36,11 @@ module.exports = {
       type: Sequelize.DATE,
       allowNull: false,
     },
+    deletedAt: {
+      type: Sequelize.DATE,
+      allowNull: true,
+    },
   }),
 
-  down: (queryInterface) => queryInterface.dropTable('Tasks'),
+  down: (queryInterface) => queryInterface.dropTable('Users'),
 };

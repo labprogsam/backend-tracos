@@ -1,11 +1,26 @@
 import express from 'express';
-import usuario from '../controller/users.js';
+import user from '../controller/users.js';
+import authorizer from '../handlers/helpers/authorizer.js';
 
 const router = express.Router();
 
 // Define as rotas de usuários
-router.route('/users').post(usuario.create);  // POST /api/usuarios
-router.route('/users/:id').put(usuario.update);  // PUT /api/usuarios/:id
-router.route('/users/:id').delete(usuario.delete);  // DELETE /api/usuarios/:id
+router.route('/users').post(
+    user.create
+);
+router.route('/users/:id').put(
+    authorizer,
+    user.update
+);
+router.route('/users/:id').delete(
+    authorizer,
+    user.remove
+);
+
+router.route('/users/change-password').post(
+    authorizer,
+    // user.updatePassword,
+  );
+  
 
 export default router;

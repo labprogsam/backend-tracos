@@ -16,9 +16,11 @@
   "dependencies": {
     "axios": "^0.21.0",
     "cors": "^2.8.5",
-    "dotenv": "^8.6.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.7",
     "express": "^4.17.1",
     "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",
