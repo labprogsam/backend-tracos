@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { Op } from 'sequelize';
-import User from "../models/userModel.js";
+import { User } from "../models/index.js";
 import Messages from '../constants/strings.js';
-import { Hash } from '../utils.index.js';
+import { Hash } from '../utils/index.js';
+import { sendRecoveryLink } from '../utils/mail.js';
 
 const login = async (req, res, next) => {
   try {
@@ -24,7 +25,7 @@ const login = async (req, res, next) => {
       return next({ status: 400, data: Messages.wrongPassword });
     }
 
-    if (!user.status) {
+    if (user.deletedAt) {
       return next({ status: 403, data: Messages.userDisabled });
     }
 
@@ -166,13 +167,6 @@ const recoveryPassword = async (req, res, next) => {
 const updatePassword = async (req, res, next) => {
   try {
     const loggedUser = res.locals.USER;
-    const loggedUserType = res.locals.USERTYPE;
-
-    const isAdmin = loggedUserType === userTypes.admin;
-
-    if (isAdmin) {
-      return next({ status: 403, data: messages.forbidden });
-    }
 
     const { password } = req.body;
 

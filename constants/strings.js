@@ -13,5 +13,7 @@ export default {
     expiredToken: "Expired token",
     invalidToken: "Invalid token",
     forbidden: 'Forbidden',
+    recoveryTokenInvalid: 'Recovery token invalid',
+    passwordChanged: 'password changed successfully'
 };
   

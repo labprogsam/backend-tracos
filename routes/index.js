@@ -1,4 +1,4 @@
-import usersRoutes from './usersRoutes.js';  // Importa as rotas do arquivo usuarioRoute.js
+import user from './user.js';
+import auth from './auth.js';
 
-// Exporta as rotas para que possam ser usadas em outros arquivos
-export { usersRoutes };
+export { user, auth };

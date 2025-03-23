@@ -27,6 +27,8 @@ class User extends Model {
           type: DataTypes.STRING,
           allowNull: true,
         },
+        resetPasswordToken: DataTypes.STRING,
+        resetPasswordExpires: DataTypes.DATE,
         createdAt: {
           type: DataTypes.DATE,
           allowNull: false,
@@ -49,4 +51,3 @@ class User extends Model {
 }
 
 export default User;
-

@@ -1,7 +1,7 @@
-import User from "../models/userModel.js";
 import jwt from 'jsonwebtoken';
 import messages from '../constants/strings.js'
-import {Hash} from '../utils/index.js';
+import { User } from "../models/index.js";
+import { Hash } from '../utils/index.js';
 import 'dotenv/config'
 
 const create = async (req, res, next) => {

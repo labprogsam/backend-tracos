@@ -1,4 +1,5 @@
-import Users from './userModel.js';
+import User from './user.js';
+
 export {
-  Users,
+  User,
 };
