@@ -3,7 +3,7 @@ dist
 yarn-error.log
 yarn.lock
 package-lock.json
-
+.env
 # Coverage report
 __tests__/coverage
 
@@ -11,5 +11,3 @@ __tests__/coverage
 .vscode/
 
 *.insyncdl
-
-.env
