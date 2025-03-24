@@ -11,3 +11,7 @@ __tests__/coverage
 .vscode/
 
 *.insyncdl
+
+package-lock.json
+yarn-lock.json
+.env
