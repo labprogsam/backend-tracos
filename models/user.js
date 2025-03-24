@@ -12,36 +12,38 @@ class User extends Model {
         email: {
           type: DataTypes.STRING,
           allowNull: false,
+          unique: true,
         },
         password: {
           type: DataTypes.STRING,
           allowNull: false,
         },
         type: {
-          type: DataTypes.BOOLEAN,
+          type: DataTypes.ENUM,
+          values: ['TATUADOR', 'CLIENTE'],
           allowNull: false,
         },
         profile_photo: {
           type: DataTypes.STRING,
           allowNull: true,
         },
-        created_at: {
-          type: DataTypes.STRING,
+        resetPasswordToken: DataTypes.STRING,
+        resetPasswordExpires: DataTypes.DATE,
+        createdAt: {
+          type: DataTypes.DATE,
           allowNull: false,
         },
-        updated_at: {
-          type: DataTypes.STRING,
-          allowNull: true,
+        updatedAt: {
+          type: DataTypes.DATE,
+          allowNull: false,
         },
-        deleted_at: {
-          type: DataTypes.STRING,
+        deletedAt: {
+          type: DataTypes.DATE,
           allowNull: true,
         },
       },
       {
         sequelize,
-        tableName: "users",
-        timestamps: false,
         underscored: false,
       }
     );
@@ -49,4 +51,3 @@ class User extends Model {
 }
 
 export default User;
-
