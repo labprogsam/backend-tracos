@@ -11,7 +11,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "migration": "npx sequelize db:migrate",
-    "undo": "npx sequelize db:migrate:undo"
+    "undo": "npx sequelize db:migrate:undo",
+    "production": "yarn migration && yarn sucrase-node ./index.js"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -25,7 +26,8 @@
     "pg": "^8.13.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.5",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "sucrase": "^3.35.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
