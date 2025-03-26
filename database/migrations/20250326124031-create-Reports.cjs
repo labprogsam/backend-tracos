@@ -13,6 +13,8 @@ module.exports = {
         key: 'id'        // Chave primária na tabela referenciada
       },
       allowNull: false,
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
     },
     title: {
       type: Sequelize.STRING(100), 

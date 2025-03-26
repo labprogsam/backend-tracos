@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('TattooArtist', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('Customers', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -13,18 +13,8 @@ module.exports = {
         key: 'id'        // Chave primária na tabela referenciada
       },
       allowNull: false,
-    },
-    specialty: {
-      type: Sequelize.STRING,
-      allowNull: true, // Pode ser vazio, caso o Tatuador não tenha uma especialidade definida
-    },
-    experience: {
-      type: Sequelize.INTEGER, // Anos de experiência do tatuador
-      allowNull: true,
-    },
-    tag_list: {
-      type: Sequelize.STRING,
-      allowNull: true,
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
     },
     createdAt: {
       type: Sequelize.DATE,
@@ -40,5 +30,5 @@ module.exports = {
     },
   }),
 
-  down: (queryInterface) => queryInterface.dropTable('TattooArtist'),
+  down: (queryInterface) => queryInterface.dropTable('Customers'),
 };

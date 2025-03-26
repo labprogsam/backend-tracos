@@ -9,10 +9,12 @@ module.exports = {
     artist_id: {  // Atributo da chave estrangeira
       type: Sequelize.INTEGER,
       references: {
-        model: 'TattooArtist',  // Nome da tabela referenciada
+        model: 'TattooArtists',  // Nome da tabela referenciada
         key: 'id'        // Chave primária na tabela referenciada
       },
       allowNull: false,
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
     },
     description: {
       type: Sequelize.STRING(500),
