@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { Op } from 'sequelize';
-import { User } from "../models/index.js";
+import { Users } from "../models/index.js";
 import Messages from '../constants/strings.js';
 import { Hash } from '../utils/index.js';
 import { sendRecoveryLink } from '../utils/mail.js';

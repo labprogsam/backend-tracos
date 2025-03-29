@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User } from "../../models/index.js";
+import { Users } from "../../models/index.js";
 import Messages from '../../constants/strings.js';
 
 const authorizer = async (req, res, next) => {

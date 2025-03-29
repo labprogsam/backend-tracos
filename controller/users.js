@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import messages from '../constants/strings.js'
-import { User } from "../models/index.js";
+import { Users } from "../models/index.js";
 import { Hash } from '../utils/index.js';
 import 'dotenv/config'
 

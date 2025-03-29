@@ -12,7 +12,7 @@ router.route('/tattoo-artists').get(
 
 router.route('/tattoo-artists').post(
     authorizer,
-    tattooArtistController.store
+    tattooArtistController.create
 );
 
 router.route('/tattoo-artists/:id').put(
