@@ -25,6 +25,13 @@ module.exports = {
       allowNull: false,
       unique: true,
     },
+    gender: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        isIn: [['Masculino', 'Feminino', 'Não-binário', 'Outro', 'Prefiro não dizer']]
+      }
+    },
     zip_code: {
       type: Sequelize.STRING(8), // Número do CEP do tatuador, aceitando apenas inteiros, deverá ser feito tratamento de dados no back, validando se o parâmetro tem oito caracteres
       allowNull: false,
