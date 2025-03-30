@@ -20,7 +20,7 @@ const create = async (req, res, next) => {
       return next({ status: 401, data: messages.confirmPassword });
     }
 
-    const user = await User.create({
+    const user = await Users.create({
       name,
       email: email.toLowerCase(),
       type,
@@ -49,7 +49,7 @@ const update = async (req, res, next) => {
     const { name, email, type } = req.body;
     const loggedUser = res.locals.USER;
 
-    const user = await User.findByPk(id);
+    const user = await Users.findByPk(id);
     if (!user) return next({ status: 400, data: messages.userNotFound });
 
     const isSameUser = user.id.toString() === loggedUser.id.toString();
@@ -81,7 +81,7 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await User.findByPk(id);
+    const user = await Users.findByPk(id);
     if (!user) {
       return next({ status: 401, data: messages.userNotFound });
     }
