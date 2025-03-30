@@ -1,73 +1,31 @@
-// models/ArtistInformations.js
+// models/TattooArtists.js
 import { Model, DataTypes } from "sequelize";
 
-class ArtistInformations extends Model {
+class TattooArtists extends Model {
   static init(sequelize) {
     super.init(
       {
-        artist_id: {
+        user_id: {
           type: DataTypes.INTEGER,
           references: {
-            model: 'TattooArtists', 
+            model: 'Users', 
             key: 'id'        
           },
           allowNull: false,
           onUpdate: 'CASCADE',
           onDelete: 'CASCADE'
         },
-        description: {
-          type: DataTypes.STRING(500),
-          allowNull: true,
-        },
-        phone_number: {
-          type: DataTypes.STRING(13),
-          allowNull: false,
-          unique: true,
-        },
-        gender: {
+        specialty: {
           type: DataTypes.STRING,
           allowNull: true,
-          validate: {
-            isIn: [['Masculino', 'Feminino', 'Não-binário', 'Outro', 'Prefiro não dizer']]
-        }
-        },        
-        zip_code: {
-            type: DataTypes.STRING(8),
-            allowNull: false,
         },
-        street: {
-        type: DataTypes.STRING, 
-        allowNull: false,
+        experience: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
         },
-        number: {
-        type: DataTypes.INTEGER, 
-        allowNull: false,
-        },
-        addressComplement: {
-        type: DataTypes.STRING, 
-        allowNull: true, // Campo não obrigatório
-        },
-        neighborhood: { 
-        type: DataTypes.STRING, 
-        allowNull: false,
-        },
-        city: {
-        type: DataTypes.STRING, 
-        allowNull: false,
-        },
-        state: {
-        type: DataTypes.STRING, 
-        allowNull: false,
-        },
-        cpf: {
-        type: DataTypes.STRING(11), 
-        allowNull: false,
-        unique: true,
-        },
-        isverified: {
-        type: DataTypes.BOOLEAN, 
-        allowNull: false,
-        defaultValue: false, // Valor padrão definido
+        tag_list: {
+          type: DataTypes.STRING,
+          allowNull: true,
         },
         createdAt: {
           type: DataTypes.DATE,
@@ -90,4 +48,4 @@ class ArtistInformations extends Model {
   }
 }
 
-export default ArtistInformations;
+export default TattooArtists;

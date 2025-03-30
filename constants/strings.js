@@ -14,6 +14,33 @@ export default {
     invalidToken: "Invalid token",
     forbidden: 'Forbidden',
     recoveryTokenInvalid: 'Recovery token invalid',
-    passwordChanged: 'password changed successfully'
+    passwordChanged: 'password changed successfully',
+    ARTIST_INFO: {
+        MISSING_FIELDS: "Todos os campos obrigatórios devem ser preenchidos.",
+        INVALID_CPF: "O CPF informado é inválido.",
+        INVALID_ZIP_CODE: "O CEP informado é inválido. Deve conter 8 dígitos numéricos.",
+        INVALID_PHONE: "O número de telefone deve conter 13 dígitos (DDI + DDD + número).",
+        NOT_FOUND: "Informações do tatuador não encontradas.",
+      },
+      BOOKINGS: {
+        NOT_FOUND: "Reserva não encontrada.",
+        FORBIDDEN_UPDATE: "Você não tem permissão para modificar esta reserva.", 
+        UPDATE_SUCCESS: "Reserva atualizada com sucesso.", 
+        DELETE_SUCCESS: "Reserva excluída com sucesso.", 
+        CREATE_SUCCESS: "Reserva criada com sucesso.", 
+        INVALID_CUSTOMER: "O cliente não é válido ou não existe.",
+        INVALID_ARTIST: "O tatuador não é válido ou não existe.", 
+        INVALID_DATE: "A data e hora fornecidas não são válidas.", 
+        INVALID_TAGS: "A lista de tags fornecida contém valores inválidos.", 
+        REQUIRED_FIELDS: "Os campos 'customer_id' e 'artist_id' são obrigatórios.", 
+      },
+      TATTOO_ARTISTS: {
+        NOT_FOUND: "Tatuador não encontrado.",
+        REMOVE_SUCCESS: "Tatuador removido com sucesso.", 
+        CREATE_SUCCESS: "Tatuador criado com sucesso.", 
+        UPDATE_SUCCESS: "Tatuador atualizado com sucesso.", 
+        INVALID_USER: "O usuário informado não existe ou não é válido.", 
+        SEARCH_REQUIRED: "É necessário fornecer um parâmetro de pesquisa para realizar a busca.",
+      },
 };
   

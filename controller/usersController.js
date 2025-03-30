@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import messages from '../constants/strings.js'
-import { Users } from "../models/index.js";
+import { User } from "../models/index.js";
 import { Hash } from '../utils/index.js';
 import 'dotenv/config'
 
@@ -52,23 +52,21 @@ const update = async (req, res, next) => {
     const user = await Users.findByPk(id);
     if (!user) return next({ status: 400, data: messages.userNotFound });
 
-    const isSameUser = user.id.toString() === loggedUser.id.toString();
-
-    if (!isSameUser) {
+    if (user.id.toString() !== loggedUser.id.toString()) {
       return next({ status: 403, data: messages.forbidden });
     }
 
-    if (type !== "CLIENTE" && type !== "TATUADOR") {
+    if (type && type !== "CLIENTE" && type !== "TATUADOR") {
       return next({ status: 401, data: messages.invalidType });
     }
 
-    const updatedUser = await user.update({
+    await user.update({
       name,
-      email: email.toLowerCase(),
+      email: email?.toLowerCase(),
       type
     });
 
-    res.locals.data = updatedUser[1][0];
+    res.locals.data = user;
     delete res.locals.data.dataValues.password;
     res.locals.status = 200;
 

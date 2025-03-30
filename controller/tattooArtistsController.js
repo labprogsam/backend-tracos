@@ -7,6 +7,12 @@ const create = async (req, res, next) => {
   try {
     const { user_id, specialty, experience, tag_list } = req.body;
 
+    // Verifica se o user_id existe
+    const user = await Users.findByPk(user_id);
+    if (!user) {
+      return next({ status: 400, data: messages.TATTOO_ARTISTS.INVALID_USER });
+    }
+
     const artist = await TattooArtists.create({
       user_id,
       specialty,
@@ -16,6 +22,7 @@ const create = async (req, res, next) => {
 
     res.locals.data = artist;
     res.locals.status = 201;
+    res.locals.message = messages.TATTOO_ARTISTS.CREATE_SUCCESS;
 
     return next();
   } catch (err) {
@@ -23,13 +30,14 @@ const create = async (req, res, next) => {
   }
 };
 
+
 const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { specialty, experience, tag_list } = req.body;
 
     const artist = await TattooArtists.findByPk(id);
-    if (!artist) return next({ status: 400, data: messages.ARTISTS.NOT_FOUND });
+    if (!artist) return next({ status: 400, data: messages.TATTOO_ARTISTS.NOT_FOUND });
 
     const updatedArtist = await artist.update({
       specialty,
@@ -39,6 +47,7 @@ const update = async (req, res, next) => {
 
     res.locals.data = updatedArtist;
     res.locals.status = 200;
+    res.locals.message = messages.TATTOO_ARTISTS.UPDATE_SUCCESS;
 
     return next();
   } catch (err) {
@@ -51,24 +60,26 @@ const remove = async (req, res, next) => {
     const { id } = req.params;
 
     const artist = await TattooArtists.findByPk(id);
-    if (!artist) return next({ status: 400, data: messages.ARTISTS.NOT_FOUND });
+    if (!artist) return next({ status: 400, data: messages.TATTOO_ARTISTS.NOT_FOUND });
 
     await artist.destroy();
 
     res.locals.status = 204;
+    res.locals.message = messages.TATTOO_ARTISTS.REMOVE_SUCCESS; // Mensagem de sucesso
 
     return next();
   } catch (err) {
     next(err);
   }
 };
+
 //A pesquisa será feita nos campos name, tag_list, specialty, e experience. e por enquanto só tá retornando o id do tatuador, dps vai poder retornar as imagens dele.
 const list = async (req, res, next) => {
     try {
       const { search } = req.query;  // Pegando o parâmetro de pesquisa da query string
   
       if (!search) {
-        return next({ status: 400, data: messages.ARTISTS.SEARCH_REQUIRED });
+        return next({ status: 400, data: messages.TATTOO_ARTISTS.SEARCH_REQUIRED });
       }
   
       // Filtros de pesquisa
@@ -94,7 +105,7 @@ const list = async (req, res, next) => {
       });
   
       if (artists.length === 0) {
-        return next({ status: 404, data: messages.ARTISTS.NOT_FOUND });
+        return next({ status: 404, data: messages.TATTOO_ARTISTS.NOT_FOUND });
       }
   
       // Retorna os IDs dos tatuadores que atendem ao critério de pesquisa
