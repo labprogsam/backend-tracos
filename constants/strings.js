@@ -42,5 +42,22 @@ export default {
         INVALID_USER: "O usuário informado não existe ou não é válido.", 
         SEARCH_REQUIRED: "É necessário fornecer um parâmetro de pesquisa para realizar a busca.",
       },
+      NOTIFICATIONS: {
+        TITLE_REQUIRED: 'O título da notificação é obrigatório.',
+        NOT_FOUND: 'Notificação não encontrada.',
+        SUCCESS_CREATED: 'Notificação criada com sucesso.',
+        SUCCESS_UPDATED: 'Notificação atualizada com sucesso.',
+        SUCCESS_DELETED: 'Notificação deletada com sucesso.',
+        USER_ID_REQUIRED: 'O user_id é obrigatório para listar notificações.',
+        NO_NOTIFICATIONS_FOUND: 'Nenhuma notificação encontrada para este usuário.',
+      },
+      CUSTOMERS: {
+        NOT_FOUND: "Cliente não encontrado.",
+        CREATED_SUCCESS: "Cliente criado com sucesso.",
+        UPDATED_SUCCESS: "Cliente atualizado com sucesso.",
+        DELETED_SUCCESS: "Cliente deletado com sucesso.",
+        USER_ID_REQUIRED: "O campo 'user_id' é obrigatório.",
+        USER_ID_NOT_FOUND: "O 'user_id' informado não existe.",
+      },
 };
   

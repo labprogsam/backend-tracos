@@ -3,4 +3,5 @@ import auth from './auth.js';
 import bookings from './bookings.js'
 import tattooArtists from './tattooArtists.js'
 import artistInformations from './artistInformations.js';
-export { user, auth, bookings, tattooArtists, artistInformations };
+import notifications from './notifications.js';
+export { user, auth, bookings, tattooArtists, artistInformations, notifications };
