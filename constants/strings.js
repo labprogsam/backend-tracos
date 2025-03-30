@@ -59,5 +59,13 @@ export default {
         USER_ID_REQUIRED: "O campo 'user_id' é obrigatório.",
         USER_ID_NOT_FOUND: "O 'user_id' informado não existe.",
       },
+      TAGS: {
+        NOT_FOUND: "Tag não encontrada.",
+        CREATED_SUCCESS: "Tag criada com sucesso.",
+        UPDATED_SUCCESS: "Tag atualizada com sucesso.",
+        DELETED_SUCCESS: "Tag deletada com sucesso.",
+        NAME_REQUIRED: "O campo 'name' é obrigatório.",
+        DESCRIPTION_REQUIRED: "O campo 'description' é obrigatório.",
+      },
 };
   
