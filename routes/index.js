@@ -6,4 +6,5 @@ import artistInformations from './artistInformations.js';
 import notifications from './notifications.js';
 import customers from './customers.js';
 import tags from './tags.js';
-export { user, auth, bookings, tattooArtists, artistInformations, notifications, customers, tags };
+import report from './report.js'
+export { user, auth, bookings, tattooArtists, artistInformations, notifications, customers, tags, report, };

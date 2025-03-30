@@ -67,5 +67,14 @@ export default {
         NAME_REQUIRED: "O campo 'name' é obrigatório.",
         DESCRIPTION_REQUIRED: "O campo 'description' é obrigatório.",
       },
+      REPORTS: {
+        NOT_FOUND: "Relatório não encontrado.",
+        CREATED_SUCCESS: "Relatório criado com sucesso.",
+        UPDATED_SUCCESS: "Relatório atualizado com sucesso.",
+        DELETED_SUCCESS: "Relatório deletado com sucesso.",
+        TITLE_REQUIRED: "O campo 'title' é obrigatório.",
+        DESCRIPTION_REQUIRED: "O campo 'description' é obrigatório.",
+        USER_ID_REQUIRED: "O campo 'user_id' é obrigatório.",
+      },
 };
   
