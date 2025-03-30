@@ -1,4 +1,4 @@
-import { Tag } from '../models';
+import { Tags } from '../models/index.js';
 import messages from '../constants/strings.js';
 
 const create = async (req, res, next) => {
@@ -9,7 +9,7 @@ const create = async (req, res, next) => {
     if (!name) return next({ status: 400, data: messages.TAGS.NAME_REQUIRED });
     if (!description) return next({ status: 400, data: messages.TAGS.DESCRIPTION_REQUIRED });
 
-    const tag = await Tag.create({
+    const tag = await Tags.create({
       name,
       description,
     });
@@ -28,7 +28,7 @@ const update = async (req, res, next) => {
     const { id } = req.params;
     const { name, description } = req.body;
 
-    const tag = await Tag.findByPk(id);
+    const tag = await Tags.findByPk(id);
     if (!tag) return next({ status: 400, data: messages.TAGS.NOT_FOUND });
 
     // Validações
@@ -53,7 +53,7 @@ const remove = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const tag = await Tag.findByPk(id);
+    const tag = await Tags.findByPk(id);
     if (!tag) return next({ status: 400, data: messages.TAGS.NOT_FOUND });
 
     await tag.update({ deletedAt: new Date().toISOString() });
@@ -69,7 +69,7 @@ const remove = async (req, res, next) => {
 
 const list = async (req, res, next) => {
   try {
-    const tags = await Tag.findAll({
+    const tags = await Tags.findAll({
       where: {
         deletedAt: null,
       },

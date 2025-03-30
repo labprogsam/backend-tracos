@@ -1,4 +1,4 @@
-import { Images } from '../models';
+import { Images } from '../models/index.js';
 import cloudinary from 'cloudinary';
 import messages from '../constants/strings.js';
 import fs from 'fs';

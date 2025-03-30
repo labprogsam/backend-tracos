@@ -1,6 +1,6 @@
 // controllers/artistInformationController.js
 import messages from '../constants/strings.js';
-import { ArtistInformation } from '../models/index.js';
+import { ArtistInformations } from '../models/index.js';
 import 'dotenv/config';
 
 
@@ -42,7 +42,7 @@ const create = async (req, res, next) => {
     }
 
     // Criando registro no banco de dados
-    const artistInfo = await ArtistInformation.create({
+    const artistInfo = await ArtistInformations.create({
       artist_id,
       description,
       phone_number,
@@ -67,7 +67,7 @@ const create = async (req, res, next) => {
 
 const list = async (req, res, next) => {
   try {
-    const artistInfos = await ArtistInformation.findAll();
+    const artistInfos = await ArtistInformations.findAll();
     res.locals.data = artistInfos;
     res.locals.status = 200;
     return next();
@@ -81,7 +81,7 @@ const update = async (req, res, next) => {
     const { id } = req.params;
     const loggedUser = res.locals.USER;
 
-    const artistInfo = await ArtistInformation.findByPk(id);
+    const artistInfo = await ArtistInformations.findByPk(id);
     if (!artistInfo) return next({ status: 400, data: messages.ARTIST_INFO.NOT_FOUND });
 
     if (artistInfo.artist_id.toString() !== loggedUser.id.toString()) {
@@ -102,7 +102,7 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const artistInfo = await ArtistInformation.findByPk(id);
+    const artistInfo = await ArtistInformations.findByPk(id);
     if (!artistInfo) return next({ status: 404, data: messages.ARTIST_INFO.NOT_FOUND });
 
     await artistInfo.update({ deletedAt: new Date().toISOString() });

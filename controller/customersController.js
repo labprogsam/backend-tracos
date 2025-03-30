@@ -1,5 +1,5 @@
-import { Customers } from '../models';
-import { Users } from '../models';
+import { Customers } from '../models/index.js';
+import { Users } from '../models/index.js';
 import messages from '../constants/strings.js';
 
 const create = async (req, res, next) => {

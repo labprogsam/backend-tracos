@@ -11,7 +11,7 @@ const login = async (req, res, next) => {
 
     const hashedPassword = Hash(password, email.toLowerCase());
 
-    const user = await User.findOne({
+    const user = await Users.findOne({
       where: {
         email: email.toLowerCase(),
       },
