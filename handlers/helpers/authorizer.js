@@ -17,7 +17,7 @@ const authorizer = async (req, res, next) => {
         return next({ status: 500, data: Messages.internalError });
       }
 
-      const user = await User.findByPk(id);
+      const user = await Users.findByPk(id);
 
       if (!user) {
         return next({ status: 401, data: Messages.userNotFound });
