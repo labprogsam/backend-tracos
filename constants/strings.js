@@ -76,5 +76,14 @@ export default {
         DESCRIPTION_REQUIRED: "O campo 'description' é obrigatório.",
         USER_ID_REQUIRED: "O campo 'user_id' é obrigatório.",
       },
+      IMAGES: {
+        NOT_FOUND: "Imagem não encontrada.",
+        CREATED_SUCCESS: "Imagem criada com sucesso.",
+        UPDATED_SUCCESS: "Imagem atualizada com sucesso.",
+        DELETED_SUCCESS: "Imagem deletada com sucesso.",
+        URL_REQUIRED: "A URL da imagem é obrigatória.",
+        ARTIST_ID_REQUIRED: "O campo 'artist_id' é obrigatório.",
+        INVALID_FILE: "Arquivo inválido. Por favor, envie uma imagem.",
+      },
 };
   
