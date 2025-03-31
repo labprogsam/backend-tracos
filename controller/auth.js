@@ -97,7 +97,7 @@ const forgotPassword = async (req, res, next) => {
   try {
     const { email } = req.body;
 
-    const user = await User.findOne({
+    const user = await Users.findOne({
       where: {
         email: email.toLowerCase(),
       },
@@ -135,8 +135,7 @@ const forgotPassword = async (req, res, next) => {
 const recoveryPassword = async (req, res, next) => {
   try {
     const { token, password } = req.body;
-
-    const user = await User.findOne({
+    const user = await Users.findOne({
       where: {
         resetPasswordToken: token,
         resetPasswordExpires: {
@@ -160,6 +159,7 @@ const recoveryPassword = async (req, res, next) => {
 
     return next();
   } catch (err) {
+    console.error("Erro recovery:", err);
     return next(err);
   }
 };
@@ -170,9 +170,9 @@ const updatePassword = async (req, res, next) => {
 
     const { password } = req.body;
 
-    const hashedPassword = hash(password, loggedUser.email);
+    const hashedPassword = Hash(password, loggedUser.email);
 
-    await User.update({
+    await Users.update({
       password: hashedPassword,
     }, {
       where: {

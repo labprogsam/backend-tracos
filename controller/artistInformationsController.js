@@ -2,7 +2,8 @@
 import messages from '../constants/strings.js';
 import { ArtistInformations } from '../models/index.js';
 import 'dotenv/config';
-
+import { cpf as cpfValidator } from 'cpf-cnpj-validator';
+import validator from 'validator';
 
 const create = async (req, res, next) => {
   try {
@@ -27,7 +28,7 @@ const create = async (req, res, next) => {
     }
 
     // Validação de CPF
-    if (!validateCPF.cpf(cpf)) {
+    if (!cpfValidator.isValid(cpf)) {
       return next({ status: 400, data: messages.ARTIST_INFO.INVALID_CPF });
     }
 
@@ -61,6 +62,7 @@ const create = async (req, res, next) => {
     res.locals.status = 201;
     return next();
   } catch (err) {
+    console.error("Erro ao criar ArtistInformation:", err);
     return next(err);
   }
 };

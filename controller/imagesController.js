@@ -1,11 +1,10 @@
 import { Images } from '../models/index.js';
 import cloudinary from 'cloudinary';
 import messages from '../constants/strings.js';
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs';
 
-// Configuração do Cloudinary
-cloudinary.config({
+cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
@@ -15,31 +14,32 @@ const create = async (req, res, next) => {
   try {
     const { artist_id, description, tags, portfolio_index, is_featured } = req.body;
     const imageFile = req.file;
-
+    console.log("esse é o ponto que chegou")
     // Validações
     if (!artist_id) return next({ status: 400, data: messages.IMAGES.ARTIST_ID_REQUIRED });
     if (!imageFile) return next({ status: 400, data: messages.IMAGES.INVALID_FILE });
 
     // Enviar imagem para o Cloudinary
-    cloudinary.uploader.upload(imageFile.path, async (result) => {
-      const image = await Images.create({
-        artist_id,
-        url: result.secure_url,  // Link da imagem do Cloudinary
-        description,
-        tags,
-        portfolio_index,
-        is_featured,
-      });
+    const result = await cloudinary.v2.uploader.upload(imageFile.path);
 
-      // Remover a imagem local após o upload
-      fs.unlinkSync(imageFile.path);
-
-      res.locals.data = image;
-      res.locals.status = 201;
-
-      return next();
+    // Criar imagem no banco com a URL do Cloudinary
+    const image = await Images.create({
+      artist_id,
+      url: result.secure_url, // Link da imagem armazenada
+      description,
+      tags,
+      portfolio_index,
+      is_featured,
     });
+
+    // Remover a imagem local após o upload
+    fs.unlinkSync(imageFile.path);
+
+    res.locals.data = image;
+    res.locals.status = 201;
+    return next();
   } catch (err) {
+    console.error("Erro ao enviar imagem:", err);
     return next(err);
   }
 };
@@ -110,16 +110,25 @@ const remove = async (req, res, next) => {
 
     return next();
   } catch (err) {
+    console.error("Erro ao criar imagem:", err);
     next(err);
   }
 };
 
 const list = async (req, res, next) => {
   try {
+    const { artist_id } = req.query; // Pega o artist_id da query string (Ex: /images?artist_id=1)
+
+    const whereClause = {
+      deletedAt: null,
+    };
+
+    if (artist_id) {
+      whereClause.artist_id = artist_id; // Filtra pelo artist_id se for passado
+    }
+
     const images = await Images.findAll({
-      where: {
-        deletedAt: null,
-      },
+      where: whereClause,
       order: [['createdAt', 'DESC']],
     });
 
@@ -131,6 +140,7 @@ const list = async (req, res, next) => {
     return next(err);
   }
 };
+
 
 export default {
   create,
