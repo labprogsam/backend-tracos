@@ -1,7 +1,6 @@
 import { Images } from '../models/index.js';
 import cloudinary from 'cloudinary';
 import messages from '../constants/strings.js';
-import path from 'path';
 import fs from 'fs';
 
 cloudinary.v2.config({
@@ -14,7 +13,6 @@ const create = async (req, res, next) => {
   try {
     const { artist_id, description, tags, portfolio_index, is_featured } = req.body;
     const imageFile = req.file;
-    console.log("esse é o ponto que chegou")
     // Validações
     if (!artist_id) return next({ status: 400, data: messages.IMAGES.ARTIST_ID_REQUIRED });
     if (!imageFile) return next({ status: 400, data: messages.IMAGES.INVALID_FILE });
