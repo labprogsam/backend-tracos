@@ -7,6 +7,8 @@ import Notifications from './Notifications.js'
 import Images from './Images.js'
 import Customers from './Customers.js'
 import ArtistInformations from './ArtistInformations.js';
+
+
 export {
   Users,
   Bookings,
