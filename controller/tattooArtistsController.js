@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import messages from '../constants/strings.js';
-import { TattooArtists } from '../models/index.js';
+import { Users,TattooArtists } from '../models/index.js';
 import 'dotenv/config';
 
 const create = async (req, res, next) => {
