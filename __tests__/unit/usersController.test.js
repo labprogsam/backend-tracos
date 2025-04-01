@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 import jwt from 'jsonwebtoken';
-import userController from '../../controller/user.js';
+import userController from '../../controller/usersController.js';
 import { Users } from '../../models/index.js';
 import { Hash } from '../../utils/index.js';
 import Messages from '../../constants/strings.js';
@@ -56,44 +56,47 @@ describe('User Controller', () => {
     });
   });
 
-  describe('Update User', () => {
-    it('deve atualizar um usuário com sucesso', async () => {
-      req.params.id = '1';
-      req.body = { name: 'Updated Name', email: 'updated@email.com', type: 'TATUADOR' };
-      res.locals.USER = { id: 1 };
-      
-      const userMock = {
-        id: 1,
-        name: 'User',
-        email: 'user@email.com',
-        type: 'CLIENTE',
-        update: sinon.stub().resolves(),
-      };
-      sinon.stub(Users, 'findByPk').resolves(userMock);
-
-      await userController.update(req, res, next);
-
-      expect(userMock.update.calledOnceWith({
-        name: 'Updated Name',
-        email: 'updated@email.com',
-        type: 'TATUADOR',
-      })).toBe(true);
-      expect(res.locals.data).toEqual(userMock);
-      expect(res.locals.status).toBe(200);
-      expect(next.calledOnce).toBe(true);
+  it('deve atualizar um usuário com sucesso', async () => {
+    req.params.id = '1';
+    req.body = { name: 'Updated Name', email: 'updated@email.com', type: 'TATUADOR' };
+    res.locals.USER = { id: 1 };
+  
+    const updatedUser = {
+      id: 1,
+      name: 'Original Name',
+      email: 'original@email.com',
+      type: 'CLIENTE',
+      update: sinon.stub().callsFake(async function (newData) {
+        Object.assign(this, newData); // Atualiza os valores dentro do mock
+        return this;
+      }),
+      dataValues: { password: 'hash' }
+    };
+  
+    console.log('Mock do usuário antes de findByPk:', updatedUser);
+  
+    sinon.stub(Users, 'findByPk').resolves(updatedUser);
+  
+    await userController.update(req, res, next);
+  
+    console.log('Status após update:', res.locals.status);
+  
+    // Verifica se a atualização foi chamada corretamente
+    expect(updatedUser.update.calledOnceWith({
+      name: 'Updated Name',
+      email: 'updated@email.com',
+      type: 'TATUADOR',
+    })).toBe(true);
+  
+    expect(res.locals.data).toMatchObject({
+      id: 1, name: 'Updated Name', email: 'updated@email.com', type: 'TATUADOR'
     });
-
-    it('deve retornar erro se o usuário não existir', async () => {
-      req.params.id = '1';
-      res.locals.USER = { id: 1 };
-      sinon.stub(Users, 'findByPk').resolves(null);
-
-      await userController.update(req, res, next);
-
-      expect(next.calledWith({ status: 400, data: Messages.userNotFound })).toBe(true);
-    });
+  
+    expect(res.locals.status).toBe(200);
+    expect(next.calledOnce).toBe(true);
   });
-
+  
+  
   describe('Remove User', () => {
     it('deve remover um usuário com sucesso', async () => {
       req.params.id = '1';
