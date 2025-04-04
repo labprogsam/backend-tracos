@@ -86,7 +86,7 @@ const remove = async (req, res, next) => {
 
     await user.update({ deletedAt: new Date().toISOString() });
 
-    res.locals.status = 203;
+    res.locals.status = 204;
 
     return next();
   } catch (err) {

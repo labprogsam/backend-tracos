@@ -73,13 +73,13 @@ describe('User Controller', () => {
       dataValues: { password: 'hash' }
     };
   
-    console.log('Mock do usuário antes de findByPk:', updatedUser);
+  
   
     sinon.stub(Users, 'findByPk').resolves(updatedUser);
   
     await userController.update(req, res, next);
   
-    console.log('Status após update:', res.locals.status);
+    
   
     // Verifica se a atualização foi chamada corretamente
     expect(updatedUser.update.calledOnceWith({

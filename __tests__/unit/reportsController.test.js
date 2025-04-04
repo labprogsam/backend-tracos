@@ -89,12 +89,4 @@ describe('Reports Controller', () => {
   });
 });
 
-/*
-| Função Testada | Descrição                            | Entrada                        | Saída Esperada                       | Comportamento esperado |
-|---------------|------------------------------------|--------------------------------|-------------------------------------|-------------------------|
-| create       | Cria um novo relatório             | Dados válidos de relatório    | Status 201 e relatório criado      | Relatório cadastrado com sucesso |
-| create       | Erro se user_id não for fornecido  | Falta o user_id               | Erro 400 e mensagem apropriada     | Nenhum relatório criado |
-| update       | Atualiza dados de um relatório    | ID do relatório e novos dados | Status 200 e relatório atualizado  | Relatório editado corretamente |
-| remove       | Remove um relatório               | ID de um relatório existente  | Status 204                         | Relatório marcado como removido |
-| list         | Lista todos os relatórios         | Nenhuma entrada necessária    | Lista de relatórios e status 200   | Todos os relatórios são retornados |
-*/
+

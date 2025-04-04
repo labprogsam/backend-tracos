@@ -65,24 +65,24 @@ describe('Artist Information Controller', () => {
       req.params.id = '1';
       res.locals.USER = { id: 1 };
       req.body = { description: 'Atualizado', phone_number: '5511988888888' };
-
+  
       const artistInfoMock = {
-        id: 1,
-        artist_id: 1,
-        update: sinon.stub().resolves(req.body),
+          id: 1,
+          artist_id: 1,
+          update: sinon.stub().resolves([1]), // update retorna um array com a quantidade de linhas afetadas
       };
-
+  
       sinon.stub(ArtistInformations, 'findByPk').resolves(artistInfoMock);
       sinon.stub(validator, 'isLength').returns(true);
       sinon.stub(validator, 'isNumeric').returns(true);
-
+  
       await artistInformationController.update(req, res, next);
-
+  
       expect(artistInfoMock.update.calledOnceWith(req.body)).toBe(true);
       expect(res.locals.data).toEqual(artistInfoMock);
       expect(res.locals.status).toBe(200);
       expect(next.calledOnce).toBe(true);
-    });
+  });
 
     it('deve retornar erro se a informação não for encontrada', async () => {
       req.params.id = '999';
@@ -93,7 +93,6 @@ describe('Artist Information Controller', () => {
       expect(next.calledWith({ status: 400, data: Messages.ARTIST_INFO.NOT_FOUND })).toBe(true);
     });
   });
-
   describe('Remove Artist Information', () => {
     it('deve remover uma informação de artista com sucesso', async () => {
       req.params.id = '1';

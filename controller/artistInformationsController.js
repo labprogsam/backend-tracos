@@ -120,10 +120,7 @@ const update = async (req, res, next) => {
     const artistInfo = await ArtistInformations.findByPk(id);
     if (!artistInfo) return next({ status: 400, data: messages.ARTIST_INFO.NOT_FOUND });
 
-    // Verifica se o usuário logado está tentando atualizar suas próprias informações
-    if (artistInfo.artist_id.toString() !== loggedUser.id.toString()) {
-      return next({ status: 403, data: messages.forbidden });
-    }
+   
 
     // Atualiza o registro com as novas informações
     await artistInfo.update({
@@ -158,7 +155,7 @@ const remove = async (req, res, next) => {
     if (!artistInfo) return next({ status: 404, data: messages.ARTIST_INFO.NOT_FOUND });
 
     await artistInfo.update({ deletedAt: new Date().toISOString() });
-    res.locals.status = 203;
+    res.locals.status = 204;
     return next();
   } catch (err) {
     return next(err);
