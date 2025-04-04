@@ -26,13 +26,42 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE'
     },
-    date_time: {
+    age: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+    tatoo_style: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    body_region: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    size: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    references: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    allergies: {
+      type: Sequelize.TEXT,
+      allowNull: true
+    },
+    date_suggestion: {
       type: Sequelize.DATE, // Data e Hora da Marcação
       allowNull: false, 
     },
-    taglist: {
-      type: Sequelize.ARRAY(Sequelize.STRING), 
-      allowNull: true,
+    message: {
+      type: Sequelize.TEXT,
+      allowNull: true
+    },
+    status: {
+      type: Sequelize.BOOLEAN, 
+      allowNull: false,
+      defaultValue: false, // Valor padrão definido
     },
     createdAt: {
       type: Sequelize.DATE,

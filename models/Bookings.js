@@ -25,13 +25,42 @@ class Bookings extends Model {
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
           },
-          date_time: {
-            type: DataTypes.DATE, 
-            allowNull: false, 
+          age: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
           },
-          taglist: {
-            type: DataTypes.ARRAY(DataTypes.STRING), 
+          tatoo_style: {
+            type: DataTypes.STRING,
             allowNull: true,
+          },
+          body_region: {
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
+          size: {
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
+          references: {
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
+          allergies: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+          },
+          date_suggestion: {
+            type: DataTypes.DATE,
+            allowNull: false,
+          },
+          message: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+          },
+          status: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
           },
         createdAt: {
           type: DataTypes.DATE,

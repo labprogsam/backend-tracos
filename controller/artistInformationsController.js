@@ -93,7 +93,7 @@ const update = async (req, res, next) => {
       city,
       state,
       cpf,
-      addressComplement // Campo opcional
+      addressComplement
     } = req.body;
 
     // Verifica se os campos obrigatórios não estão vazios (não inclui campos opcionais como addressComplement)
@@ -134,7 +134,7 @@ const update = async (req, res, next) => {
       city,
       state,
       cpf,
-      addressComplement // Pode ser undefined, pois é opcional
+      addressComplement,// Pode ser undefined, pois é opcional
     });
 
     res.locals.data = artistInfo;

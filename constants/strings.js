@@ -32,7 +32,13 @@ export default {
         INVALID_ARTIST: "O tatuador não é válido ou não existe.", 
         INVALID_DATE: "A data e hora fornecidas não são válidas.", 
         INVALID_TAGS: "A lista de tags fornecida contém valores inválidos.", 
-        REQUIRED_FIELDS: "Os campos 'customer_id' e 'artist_id' são obrigatórios.", 
+        REQUIRED_FIELDS: "Os campos 'customer_id' e 'artist_id' são obrigatórios.",
+        ARTIST_REQUIRED: "O ID do tatuador é obrigatório.",
+        CUSTOMER_REQUIRED: "O ID do cliente é obrigatório.",
+        AGE_REQUIRED: "A idade é obrigatória.",
+        DATE_REQUIRED: "A data sugerida é obrigatória.",
+        NOT_FOUND: "Reserva não encontrada.",
+        DELETED_SUCCESS: "Reserva deletada com sucesso." 
       },
       TATTOO_ARTISTS: {
         NOT_FOUND: "Tatuador não encontrado.",
