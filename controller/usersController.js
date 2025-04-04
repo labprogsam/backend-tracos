@@ -14,11 +14,23 @@ const create = async (req, res, next) => {
       type
     } = req.body;
 
-    const hashedPassword = Hash(password, email.toLowerCase());
-
     if (password !== confirmPassword) {
       return next({ status: 401, data: messages.confirmPassword });
     }
+
+    // Verifica se já existe um usuário ATIVO com o mesmo e-mail
+    const existingEmail = await Users.findOne({
+      where: {
+        email: email.toLowerCase(),
+        deletedAt: null,
+      },
+    });
+
+    if (existingEmail) {
+      return next({ status: 400, data: messages.emailAlreadyExists });
+    }
+
+    const hashedPassword = Hash(password, email.toLowerCase());
 
     const user = await Users.create({
       name,
@@ -42,6 +54,7 @@ const create = async (req, res, next) => {
     return next(err);
   }
 };
+
 
 const update = async (req, res, next) => {
   try {

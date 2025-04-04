@@ -59,9 +59,11 @@ module.exports = {
       allowNull: true
     },
     status: {
-      type: Sequelize.BOOLEAN, 
+      type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: false, // Valor padrão definido
+      validate: {
+        isIn: [['Pendente', 'Confirmada', 'Realizada']]
+      }
     },
     createdAt: {
       type: Sequelize.DATE,

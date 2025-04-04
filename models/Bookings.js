@@ -58,9 +58,11 @@ class Bookings extends Model {
             allowNull: true,
           },
           status: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false,
+            type: DataTypes.STRING,
+            allowNull: true,
+            validate: {
+              isIn: [['Pendente', 'Confirmada', 'Realizada']]
+          }
           },
         createdAt: {
           type: DataTypes.DATE,

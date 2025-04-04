@@ -11,7 +11,7 @@ const upload = multer({ dest: 'uploads/' });
 
 router.route('/images').post(
   authorizer,
-  upload.single('image'), // Campo 'image' no corpo da requisição
+  upload.single('imageFile'), // Campo 'image' no corpo da requisição
   imagesController.create
 );
 
@@ -24,7 +24,7 @@ router.route('/images').get(
 
 router.route('/images/:id').put(
   authorizer,
-  upload.single('image'),
+  upload.single('imageFile'),
   imagesController.update
 );
 

@@ -15,6 +15,9 @@ export default {
     forbidden: 'Forbidden',
     recoveryTokenInvalid: 'Recovery token invalid',
     passwordChanged: 'password changed successfully',
+    emailAlreadyExists: "Já existe um usuário com este e-mail.",
+    cpfAlreadyExists: "Já existe um usuário com este CPF.",
+
     ARTIST_INFO: {
         MISSING_FIELDS: "Todos os campos obrigatórios devem ser preenchidos.",
         INVALID_CPF: "O CPF informado é inválido.",
@@ -38,7 +41,9 @@ export default {
         AGE_REQUIRED: "A idade é obrigatória.",
         DATE_REQUIRED: "A data sugerida é obrigatória.",
         NOT_FOUND: "Reserva não encontrada.",
-        DELETED_SUCCESS: "Reserva deletada com sucesso." 
+        DELETED_SUCCESS: "Reserva deletada com sucesso.",
+        INVALID_STATUS: "Status inválido." ,
+        MISSING_FIELDS: "Campos obrigatórios, não preenchidos"
       },
       TATTOO_ARTISTS: {
         NOT_FOUND: "Tatuador não encontrado.",
