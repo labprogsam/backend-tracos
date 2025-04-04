@@ -109,7 +109,7 @@ describe('User Controller', () => {
       await userController.remove(req, res, next);
 
       expect(userMock.update.calledOnceWith({ deletedAt: sinon.match.string })).toBe(true);
-      expect(res.locals.status).toBe(203);
+      expect(res.locals.status).toBe(204);
       expect(next.calledOnce).toBe(true);
     });
 
