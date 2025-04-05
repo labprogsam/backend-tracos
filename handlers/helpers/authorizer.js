@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User } from "../../models/index.js";
+import { Users } from "../../models/index.js";
 import Messages from '../../constants/strings.js';
 
 const authorizer = async (req, res, next) => {
@@ -17,7 +17,7 @@ const authorizer = async (req, res, next) => {
         return next({ status: 500, data: Messages.internalError });
       }
 
-      const user = await User.findByPk(id);
+      const user = await Users.findByPk(id);
 
       if (!user) {
         return next({ status: 401, data: Messages.userNotFound });

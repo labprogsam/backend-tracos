@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import messages from '../constants/strings.js'
-import { User } from "../models/index.js";
+import { Users } from "../models/index.js";
 import { Hash } from '../utils/index.js';
 import 'dotenv/config'
 
@@ -14,13 +14,25 @@ const create = async (req, res, next) => {
       type
     } = req.body;
 
-    const hashedPassword = Hash(password, email.toLowerCase());
-
     if (password !== confirmPassword) {
       return next({ status: 401, data: messages.confirmPassword });
     }
 
-    const user = await User.create({
+    // Verifica se já existe um usuário ATIVO com o mesmo e-mail
+    const existingEmail = await Users.findOne({
+      where: {
+        email: email.toLowerCase(),
+        deletedAt: null,
+      },
+    });
+
+    if (existingEmail) {
+      return next({ status: 400, data: messages.emailAlreadyExists });
+    }
+
+    const hashedPassword = Hash(password, email.toLowerCase());
+
+    const user = await Users.create({
       name,
       email: email.toLowerCase(),
       type,
@@ -43,32 +55,31 @@ const create = async (req, res, next) => {
   }
 };
 
+
 const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { name, email, type } = req.body;
     const loggedUser = res.locals.USER;
 
-    const user = await User.findByPk(id);
+    const user = await Users.findByPk(id);
     if (!user) return next({ status: 400, data: messages.userNotFound });
 
-    const isSameUser = user.id.toString() === loggedUser.id.toString();
-
-    if (!isSameUser) {
+    if (user.id.toString() !== loggedUser.id.toString()) {
       return next({ status: 403, data: messages.forbidden });
     }
 
-    if (type !== "CLIENTE" && type !== "TATUADOR") {
+    if (type && type !== "CLIENTE" && type !== "TATUADOR") {
       return next({ status: 401, data: messages.invalidType });
     }
 
-    const updatedUser = await user.update({
+    await user.update({
       name,
-      email: email.toLowerCase(),
+      email: email?.toLowerCase(),
       type
     });
 
-    res.locals.data = updatedUser[1][0];
+    res.locals.data = user;
     delete res.locals.data.dataValues.password;
     res.locals.status = 200;
 
@@ -81,14 +92,14 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const user = await User.findByPk(id);
+    const user = await Users.findByPk(id);
     if (!user) {
       return next({ status: 401, data: messages.userNotFound });
     }
 
     await user.update({ deletedAt: new Date().toISOString() });
 
-    res.locals.status = 203;
+    res.locals.status = 204;
 
     return next();
   } catch (err) {
