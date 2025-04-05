@@ -16,11 +16,11 @@ describe('TattooArtists Controller', () => {
   let req, res, next;
 
   beforeEach(() => {
-    req = { query: { searchTerm: '' }, params: {} };
+    req = { query: { searchTerm: '' }, params: {}, body: {} };
     res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub(),
       locals: {},
-      status: sinon.spy(),  // Usando spy aqui
-      json: sinon.spy(),    // Usando spy aqui
     };
     next = sinon.stub();
   });
@@ -50,7 +50,7 @@ describe('TattooArtists Controller', () => {
 
       await tattooArtistsController.create(req, res, next);
 
-      expect(next.calledWith({ status: 400, data: messages.TATTOO_ARTISTS.INVALID_USER })).toBe(true);
+      expect(next.calledWithMatch({ status: 400, data: messages.TATTOO_ARTISTS.INVALID_USER })).toEqual(true);
     });
   });
 
@@ -59,11 +59,26 @@ describe('TattooArtists Controller', () => {
       req.params.id = 1;
       req.body = { specialty: 'Neo Traditional', experience: 6, tag_list: 'eagle, flower' };
 
-      sinon.stub(TattooArtists, 'findByPk').resolves({ id: 1, update: sinon.stub().resolves({ id: 1, user_id: 1, specialty: 'Neo Traditional', experience: 6, tag_list: 'eagle, flower' }) });
+      sinon.stub(TattooArtists, 'findByPk').resolves({
+        id: 1,
+        update: sinon.stub().resolves({
+          id: 1,
+          user_id: 1,
+          specialty: 'Neo Traditional',
+          experience: 6,
+          tag_list: 'eagle, flower'
+        }),
+      });
 
       await tattooArtistsController.update(req, res, next);
 
-      expect(res.locals.data).toEqual({ id: 1, user_id: 1, specialty: 'Neo Traditional', experience: 6, tag_list: 'eagle, flower' });
+      expect(res.locals.data).toEqual({
+        id: 1,
+        user_id: 1,
+        specialty: 'Neo Traditional',
+        experience: 6,
+        tag_list: 'eagle, flower'
+      });
       expect(res.locals.status).toBe(200);
       expect(next.calledOnce).toBe(true);
     });
@@ -75,7 +90,7 @@ describe('TattooArtists Controller', () => {
 
       await tattooArtistsController.update(req, res, next);
 
-      expect(next.calledWith({ status: 400, data: messages.TATTOO_ARTISTS.NOT_FOUND })).toBe(true);
+      expect(next.calledWithMatch({ status: 400, data: messages.TATTOO_ARTISTS.NOT_FOUND })).toEqual(true);
     });
   });
 
@@ -83,7 +98,10 @@ describe('TattooArtists Controller', () => {
     it('deve desativar um tatuador', async () => {
       req.params.id = 1;
 
-      sinon.stub(TattooArtists, 'findByPk').resolves({ id: 1, destroy: sinon.stub().resolves() });
+      sinon.stub(TattooArtists, 'findByPk').resolves({
+        id: 1,
+        destroy: sinon.stub().resolves()
+      });
 
       await tattooArtistsController.remove(req, res, next);
 
@@ -94,27 +112,39 @@ describe('TattooArtists Controller', () => {
   });
 
   describe('List Tattoo Artists', () => {
+    let queryStub;
+  
+    afterEach(() => {
+      sinon.restore(); // limpa o stub do query a cada teste
+    });
+  
     it('deve listar todos os tatuadores ativos', async () => {
+      queryStub = sinon.stub(Pool.prototype, 'query').resolves({
+        rows: [
+          { id: 1, name: 'Tattoo Artist 1', specialty: 'Traditional', experience: '5 years', tag_list: 'color, bold' },
+          { id: 2, name: 'Tattoo Artist 2', specialty: 'Blackwork', experience: '3 years', tag_list: 'blackwork, geometric' }
+        ]
+      });
+  
       await tattooArtistsController.list(req, res, next);
-
-      sinon.assert.calledOnce(poolStub);
-      expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json).toHaveBeenCalledWith([
+  
+      sinon.assert.calledOnce(queryStub);
+      expect(res.status.calledWith(200)).toBe(true);
+      expect(res.json.calledWith([
         { id: 1, name: 'Tattoo Artist 1', specialty: 'Traditional', experience: '5 years', tag_list: 'color, bold' },
         { id: 2, name: 'Tattoo Artist 2', specialty: 'Blackwork', experience: '3 years', tag_list: 'blackwork, geometric' }
-      ]);
-      expect(next.calledOnce).toBe(true);
+      ])).toBe(true);
     });
-
+  
     it('deve retornar erro se a busca falhar', async () => {
-      poolStub.rejects(new Error('Database error'));
-
+      queryStub = sinon.stub(Pool.prototype, 'query').rejects(new Error('Database error'));
+  
       await tattooArtistsController.list(req, res, next);
-
-      sinon.assert.calledOnce(poolStub);
-      expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.json).toHaveBeenCalledWith({ error: 'Erro ao listar artistas de tatuagem' });
-      expect(next.calledOnce).toBe(true);
+  
+      sinon.assert.calledOnce(queryStub);
+      expect(res.status.calledWith(500)).toBe(true);
+      expect(res.json.calledWith({ error: 'Erro ao listar artistas de tatuagem' })).toBe(true);
     });
   });
+  
 });

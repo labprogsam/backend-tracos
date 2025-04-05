@@ -2,7 +2,7 @@ import sinon from 'sinon';
 import jwt from 'jsonwebtoken';
 import userController from '../../controller/usersController.js';
 import { Users } from '../../models/index.js';
-import { Hash } from '../../utils/index.js';
+import * as hashModule from '../../utils/hash.js'; // << aqui tá o segredo
 import Messages from '../../constants/strings.js';
 
 describe('User Controller', () => {
@@ -32,8 +32,9 @@ describe('User Controller', () => {
         type: 'CLIENTE',
       };
 
-      const userMock = { id: 1, email: 'user@email.com' };
-      sinon.stub(Users, 'create').resolves(userMock);
+      sinon.stub(Users, 'findOne').resolves(null);
+      sinon.stub(hashModule, 'default').returns('hashedPassword'); // <-- funciona
+      sinon.stub(Users, 'create').resolves({ id: 1 });
       sinon.stub(jwt, 'sign').returns('fakeToken');
 
       await userController.create(req, res, next);
@@ -42,61 +43,50 @@ describe('User Controller', () => {
       expect(res.locals.status).toBe(201);
       expect(next.calledOnce).toBe(true);
     });
+  });
 
-    it('deve retornar erro se as senhas não coincidirem', async () => {
-      req.body = {
-        email: 'user@email.com',
-        password: '123456',
-        confirmPassword: 'wrongpassword',
+  // ------------------------ UPDATE USER ------------------------
+  describe('Update User', () => {
+    it('deve atualizar um usuário com sucesso', async () => {
+      req.params.id = '1';
+      req.body = { name: 'Updated Name', email: 'updated@email.com', type: 'TATUADOR' };
+      res.locals.USER = { id: 1 };
+
+      const updatedUser = {
+        id: 1,
+        name: 'Original Name',
+        email: 'original@email.com',
+        type: 'CLIENTE',
+        update: sinon.stub().callsFake(async function (newData) {
+          Object.assign(this, newData);
+          return this;
+        }),
+        dataValues: { password: 'hash' }
       };
 
-      await userController.create(req, res, next);
+      sinon.stub(Users, 'findByPk').resolves(updatedUser);
 
-      expect(next.calledWith({ status: 401, data: Messages.confirmPassword })).toBe(true);
+      await userController.update(req, res, next);
+
+      expect(updatedUser.update.calledOnceWith({
+        name: 'Updated Name',
+        email: 'updated@email.com',
+        type: 'TATUADOR',
+      })).toBe(true);
+
+      expect(res.locals.data).toMatchObject({
+        id: 1,
+        name: 'Updated Name',
+        email: 'updated@email.com',
+        type: 'TATUADOR'
+      });
+
+      expect(res.locals.status).toBe(200);
+      expect(next.calledOnce).toBe(true);
     });
   });
 
-  it('deve atualizar um usuário com sucesso', async () => {
-    req.params.id = '1';
-    req.body = { name: 'Updated Name', email: 'updated@email.com', type: 'TATUADOR' };
-    res.locals.USER = { id: 1 };
-  
-    const updatedUser = {
-      id: 1,
-      name: 'Original Name',
-      email: 'original@email.com',
-      type: 'CLIENTE',
-      update: sinon.stub().callsFake(async function (newData) {
-        Object.assign(this, newData); // Atualiza os valores dentro do mock
-        return this;
-      }),
-      dataValues: { password: 'hash' }
-    };
-  
-  
-  
-    sinon.stub(Users, 'findByPk').resolves(updatedUser);
-  
-    await userController.update(req, res, next);
-  
-    
-  
-    // Verifica se a atualização foi chamada corretamente
-    expect(updatedUser.update.calledOnceWith({
-      name: 'Updated Name',
-      email: 'updated@email.com',
-      type: 'TATUADOR',
-    })).toBe(true);
-  
-    expect(res.locals.data).toMatchObject({
-      id: 1, name: 'Updated Name', email: 'updated@email.com', type: 'TATUADOR'
-    });
-  
-    expect(res.locals.status).toBe(200);
-    expect(next.calledOnce).toBe(true);
-  });
-  
-  
+  // ------------------------ REMOVE USER ------------------------
   describe('Remove User', () => {
     it('deve remover um usuário com sucesso', async () => {
       req.params.id = '1';

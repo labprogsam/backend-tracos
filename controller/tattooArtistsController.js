@@ -7,11 +7,11 @@ const { Pool } = pkg;
 
 // Configuração de conexão com o banco
 const pool = new Pool({
-  user: process.env.DB_USER, // Substitua pelo seu usuário do banco
+  user: process.env.DB_USER, 
   host: process.env.DB_HOST,
-  database: process.env.DB_NAME, // Substitua pelo nome do seu banco de dados
-  password: process.env.DB_PASS, // Substitua pela sua senha
-  port: 5432, // Porto do PostgreSQL
+  database: process.env.DB_NAME, 
+  password: process.env.DB_PASS, 
+  port: 5432, 
   ssl:true
 });
 
@@ -111,7 +111,6 @@ const result = await pool.query(query, [`%${searchTerm}%`]);
     // Retornando os resultados
     res.status(200).json(result.rows);  // `result.rows` contém os registros retornados pela query
   } catch (err) {
-    console.error('Erro ao listar artistas de tatuagem:', err);
     res.status(500).json({ error: 'Erro ao listar artistas de tatuagem' });
   }
 }

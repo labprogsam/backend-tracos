@@ -13,7 +13,6 @@ const create = async (req, res, next) => {
   try {
     const { user_id, title, description } = req.body;
     const files = req.files; // Recebe múltiplos arquivos
-    console.log(user_id)
     // Validações
     if (!user_id) return next({ status: 400, data: messages.REPORTS.USER_ID_REQUIRED });
     if (!title) return next({ status: 400, data: messages.REPORTS.TITLE_REQUIRED });
@@ -41,7 +40,6 @@ const create = async (req, res, next) => {
 
     return next();
   } catch (err) {
-    console.error("Erro ao enviar arquivos:", err);
     return next(err);
   }
 };

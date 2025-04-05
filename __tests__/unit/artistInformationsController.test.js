@@ -64,35 +64,71 @@ describe('Artist Information Controller', () => {
     it('deve atualizar uma informação de artista com sucesso', async () => {
       req.params.id = '1';
       res.locals.USER = { id: 1 };
-      req.body = { description: 'Atualizado', phone_number: '5511988888888' };
+      req.body = {
+        description: 'Atualizado',
+        phone_number: '5511988888888',
+        gender: 'Masculino',
+        zip_code: '01001000',
+        street: 'Rua Exemplo',
+        number: '123',
+        neighborhood: 'Centro',
+        city: 'São Paulo',
+        state: 'SP',
+        cpf: '12345678909',
+      };
   
       const artistInfoMock = {
-          id: 1,
-          artist_id: 1,
-          update: sinon.stub().resolves([1]), // update retorna um array com a quantidade de linhas afetadas
+        id: 1,
+        artist_id: 1,
+        update: sinon.stub().resolvesThis(),
       };
   
       sinon.stub(ArtistInformations, 'findByPk').resolves(artistInfoMock);
+      sinon.stub(validator, 'isPostalCode').returns(true);
       sinon.stub(validator, 'isLength').returns(true);
       sinon.stub(validator, 'isNumeric').returns(true);
+      sinon.stub(cpfValidator, 'isValid').returns(true);
   
       await artistInformationController.update(req, res, next);
   
-      expect(artistInfoMock.update.calledOnceWith(req.body)).toBe(true);
+      expect(artistInfoMock.update.calledOnce).toBe(true);
+      expect(artistInfoMock.update.firstCall.args[0]).toMatchObject(req.body);
       expect(res.locals.data).toEqual(artistInfoMock);
       expect(res.locals.status).toBe(200);
       expect(next.calledOnce).toBe(true);
-  });
-
+    });
+  
     it('deve retornar erro se a informação não for encontrada', async () => {
       req.params.id = '999';
+      req.body = {
+        description: 'Atualizado',
+        phone_number: '5511988888888',
+        gender: 'Masculino',
+        zip_code: '01001000',
+        street: 'Rua Exemplo',
+        number: '123',
+        neighborhood: 'Centro',
+        city: 'São Paulo',
+        state: 'SP',
+        cpf: '12345678909',
+      };
+  
       sinon.stub(ArtistInformations, 'findByPk').resolves(null);
-
+      sinon.stub(validator, 'isPostalCode').returns(true);
+      sinon.stub(validator, 'isLength').returns(true);
+      sinon.stub(validator, 'isNumeric').returns(true);
+      sinon.stub(cpfValidator, 'isValid').returns(true);
+  
       await artistInformationController.update(req, res, next);
-
-      expect(next.calledWith({ status: 400, data: Messages.ARTIST_INFO.NOT_FOUND })).toBe(true);
+  
+      expect(next.calledOnce).toBe(true);
+      expect(next.firstCall.args[0]).toEqual({
+        status: 400,
+        data: Messages.ARTIST_INFO.NOT_FOUND,
+      });
     });
   });
+  
   describe('Remove Artist Information', () => {
     it('deve remover uma informação de artista com sucesso', async () => {
       req.params.id = '1';
@@ -105,7 +141,7 @@ describe('Artist Information Controller', () => {
       await artistInformationController.remove(req, res, next);
 
       expect(artistInfoMock.update.calledOnce).toBe(true);
-      expect(res.locals.status).toBe(203);
+      expect(res.locals.status).toBe(204);
       expect(next.calledOnce).toBe(true);
     });
 
