@@ -1,0 +1,277 @@
+<html><head><meta charset="utf-8"/><title>Relatório de Testes Unitários</title><style type="text/css">:root {
+  --text-primary: #111;
+  --text-secondary: #4f4f4f;
+  --success: #006633;
+  --success-bright: #80ffbf;
+  --danger: #cc071e;
+  --danger-bright: #fbdfe0;
+  --warning: #995c00;
+  --warning-bright: #ffeea8;
+  --panel: #eee;
+  --border: #949494;
+  --disabled: #6b6b6b;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+}
+body {
+  padding: 2rem 1rem;
+}
+.jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+#metadata-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.additional-information-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/** SUMMARY */
+#summary {
+  color: var(--text-primary);
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 0.5rem;
+  background: var(--panel);
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: var(--success);
+  border-left: 0.4rem solid var(--success);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: var(--danger);
+  border-left: 0.4rem solid var(--danger);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-pending {
+  color: var(--warning);
+  border-left: 0.4rem solid var(--warning);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-empty {
+  color: var(--disabled);
+  border-left: 0.4rem solid var(--disabled);
+  margin-bottom: 0.15rem;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: var(--success-bright);
+  color: var(--success);
+}
+.test-result.failed {
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.test-result.pending {
+  background-color: var(--warning-bright);
+  color: var(--warning);
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed var(--danger);
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 1rem;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: var(--panel);
+  color: var(--text-secondary);
+  border: 0.15rem solid;
+  border-color: var(--panel);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info:hover {
+  border-color: var(--border);
+  cursor: pointer;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 1rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.85rem;
+}
+.suite-info .suite-time.warn {
+  background-color: var(--danger);
+  color: #fff;
+}
+.suite-info:before {
+  content: "\2303";
+  display: inline-block;
+  margin-right: 1rem;
+  transform: rotate(180deg) translateY(0.15rem);
+}
+.suite-container[open] .suite-info:before {
+  transform: rotate(0deg) translateY(0.15rem);
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--panel);
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><main class="jesthtml-content"><header><h1 id="title">Relatório de Testes Unitários</h1></header><section id="metadata-container"><div id="timestamp">Started: 2025-04-07 13:39:27</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (10)</div><div class="summary-passed ">9 passed</div><div class="summary-failed ">1 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (77)</div><div class="summary-passed ">76 passed</div><div class="summary-failed ">1 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></section><details id="suite-1" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Yasmim Sales\Documents\backend-tracos\__tests__\unit\authController.test.js</div><div class="suite-time warn">12.785s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Login</div><div class="test-title">deve retornar sucesso ao logar</div><div class="test-status">passed</div><div class="test-duration">0.097s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Login</div><div class="test-title">deve retornar erro se o email estiver errado</div><div class="test-status">passed</div><div class="test-duration">0.027s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Login</div><div class="test-title">deve retornar erro se a senha estiver errada</div><div class="test-status">passed</div><div class="test-duration">0.022s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Login</div><div class="test-title">deve retornar erro se o usuário estiver desativado</div><div class="test-status">passed</div><div class="test-duration">0.056s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Refresh Token</div><div class="test-title">deve gerar um novo token se o token for válido</div><div class="test-status">passed</div><div class="test-duration">0.019s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Refresh Token</div><div class="test-title">deve retornar erro se o token não for fornecido</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Refresh Token</div><div class="test-title">deve retornar erro se o token for inválido</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Forgot Password</div><div class="test-title">deve enviar um e-mail de recuperação</div><div class="test-status">failed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Forgot Password</div><div class="test-title">deve retornar erro se o e-mail não existir</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Recovery Password</div><div class="test-title">deve redefinir a senha com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.04s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Recovery Password</div><div class="test-title">deve retornar erro se o token for inválido</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Auth Controller &gt; Update Password</div><div class="test-title">deve atualizar a senha do usuário logado</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div></div></details><details id="suite-2" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Yasmim Sales\Documents\backend-tracos\__tests__\unit\artistInformationsController.test.js</div><div class="suite-time warn">13.067s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Artist Information Controller - Novo &gt; Create Artist Information</div><div class="test-title">deve criar uma informação de artista com sucesso com upload de arquivos</div><div class="test-status">passed</div><div class="test-duration">0.08s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Artist Information Controller - Novo &gt; Create Artist Information</div><div class="test-title">deve retornar erro se faltar alguma das fotos obrigatórias</div><div class="test-status">passed</div><div class="test-duration">0.02s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Artist Information Controller - Novo &gt; Create Artist Information</div><div class="test-title">deve retornar erro se o CPF for inválido</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Artist Information Controller - Novo &gt; Update Artist Information</div><div class="test-title">deve atualizar uma informação de artista com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.054s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Artist Information Controller - Novo &gt; Update Artist Information</div><div class="test-title">deve retornar erro se CPF inválido no update</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Artist Information Controller - Novo &gt; Remove Artist Information</div><div class="test-title">deve remover uma informação de artista com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Artist Information Controller - Novo &gt; Remove Artist Information</div><div class="test-title">deve retornar erro se o ID não existir</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Artist Information Controller - Novo &gt; List Artist Informations</div><div class="test-title">deve listar todas as informações de artistas</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div></div></details><details id="suite-3" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Yasmim Sales\Documents\backend-tracos\__tests__\unit\usersController.test.js</div><div class="suite-time warn">13.114s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Controller &gt; Create User</div><div class="test-title">deve criar um usuário com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.09s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Controller &gt; Create User</div><div class="test-title">deve retornar erro se as senhas não coincidirem</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Controller &gt; Create User</div><div class="test-title">deve retornar erro se o e-mail já estiver em uso</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Controller &gt; Update User</div><div class="test-title">deve atualizar um usuário com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.044s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Controller &gt; Update User</div><div class="test-title">deve atualizar imagem de perfil se enviada</div><div class="test-status">passed</div><div class="test-duration">0.015s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Controller &gt; Update User</div><div class="test-title">deve impedir alteração por outro usuário</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Controller &gt; Update User</div><div class="test-title">deve retornar erro se usuário não for encontrado</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Controller &gt; Update User</div><div class="test-title">deve retornar erro se o tipo for inválido</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Controller &gt; Remove User</div><div class="test-title">deve remover um usuário com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.026s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Controller &gt; Remove User</div><div class="test-title">deve retornar erro se o usuário não existir</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div></div></details><details id="suite-4" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Yasmim Sales\Documents\backend-tracos\__tests__\unit\notificationsController.test.js</div><div class="suite-time">1.489s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notification Controller &gt; Create Notification</div><div class="test-title">deve criar uma notificação com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notification Controller &gt; Create Notification</div><div class="test-title">deve retornar erro se o título da notificação não for fornecido</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notification Controller &gt; Update Notification</div><div class="test-title">deve atualizar uma notificação com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notification Controller &gt; Update Notification</div><div class="test-title">deve retornar erro se a notificação não for encontrada</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notification Controller &gt; Remove Notification</div><div class="test-title">deve remover uma notificação com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notification Controller &gt; Remove Notification</div><div class="test-title">deve retornar erro se a notificação não for encontrada</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notification Controller &gt; List Notifications</div><div class="test-title">deve listar as notificações de um usuário</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notification Controller &gt; List Notifications</div><div class="test-title">deve retornar erro se o user_id não for fornecido</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notification Controller &gt; List Notifications</div><div class="test-title">deve retornar erro se não houver notificações para o user_id fornecido</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div></div></details><details id="suite-5" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Yasmim Sales\Documents\backend-tracos\__tests__\unit\tattoArtistsController.test.js</div><div class="suite-time">2.044s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">TattooArtists Controller &gt; Create Tattoo Artist</div><div class="test-title">deve criar um novo tatuador</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">TattooArtists Controller &gt; Create Tattoo Artist</div><div class="test-title">deve retornar erro se o user_id não existir</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">TattooArtists Controller &gt; Update Tattoo Artist</div><div class="test-title">deve atualizar um tatuador existente</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">TattooArtists Controller &gt; Update Tattoo Artist</div><div class="test-title">deve retornar erro se o tatuador não existir</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">TattooArtists Controller &gt; Remove Tattoo Artist</div><div class="test-title">deve desativar um tatuador</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">TattooArtists Controller &gt; List Tattoo Artists</div><div class="test-title">deve listar todos os tatuadores ativos</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">TattooArtists Controller &gt; List Tattoo Artists</div><div class="test-title">deve retornar erro se a busca falhar</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div></div></details><details id="suite-6" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Yasmim Sales\Documents\backend-tracos\__tests__\unit\bookingsController.test.js</div><div class="suite-time">1.876s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Bookings Controller &gt; Create Booking</div><div class="test-title">deve criar um agendamento com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Bookings Controller &gt; Create Booking</div><div class="test-title">deve retornar erro se campos obrigatórios não forem fornecidos</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Bookings Controller &gt; Create Booking</div><div class="test-title">deve retornar erro se age for menor que 18 e authorization não for enviado</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Bookings Controller &gt; Create Booking</div><div class="test-title">deve fazer upload de arquivos e remover os arquivos locais</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Bookings Controller &gt; Update Booking</div><div class="test-title">deve atualizar um agendamento com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Bookings Controller &gt; Remove Booking</div><div class="test-title">deve remover um agendamento com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Bookings Controller &gt; List Bookings</div><div class="test-title">deve listar os agendamentos pelo artist_id</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div></div></details><details id="suite-7" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Yasmim Sales\Documents\backend-tracos\__tests__\unit\tagsController.test.js</div><div class="suite-time">1.479s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Tag Controller &gt; Create Tag</div><div class="test-title">deve criar uma tag com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Tag Controller &gt; Create Tag</div><div class="test-title">deve retornar erro se o nome da tag não for fornecido</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Tag Controller</div><div class="test-title">deve atualizar uma tag com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Tag Controller &gt; Remove Tag</div><div class="test-title">deve remover uma tag com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Tag Controller &gt; Remove Tag</div><div class="test-title">deve retornar erro se a tag não existir</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Tag Controller &gt; List Tags</div><div class="test-title">deve listar todas as tags</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div></div></details><details id="suite-8" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Yasmim Sales\Documents\backend-tracos\__tests__\unit\reportsController.test.js</div><div class="suite-time">1.687s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Reports Controller &gt; Create Report</div><div class="test-title">deve criar um relatório com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.031s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Reports Controller &gt; Create Report</div><div class="test-title">deve retornar erro se user_id não for fornecido</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Reports Controller &gt; Update Report</div><div class="test-title">deve atualizar um relatório com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Reports Controller &gt; Remove Report</div><div class="test-title">deve remover um relatório com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Reports Controller &gt; List Reports</div><div class="test-title">deve listar todos os relatórios</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div></div></details><details id="suite-9" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Yasmim Sales\Documents\backend-tracos\__tests__\unit\imagesController.test.js</div><div class="suite-time">2.099s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Image Controller &gt; Create Image</div><div class="test-title">deve criar uma imagem com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.014s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Image Controller &gt; Create Image</div><div class="test-title">deve retornar erro se o artist_id não for fornecido</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Image Controller &gt; Update Image</div><div class="test-title">deve atualizar uma imagem com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Image Controller &gt; Update Image</div><div class="test-title">deve retornar erro se a imagem não existir</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Image Controller &gt; Remove Image</div><div class="test-title">deve remover uma imagem com sucesso</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Image Controller &gt; Remove Image</div><div class="test-title">deve retornar erro se a imagem não existir</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Image Controller &gt; List Images</div><div class="test-title">deve listar todas as imagens</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div></div></details><details id="suite-10" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">C:\Users\Yasmim Sales\Documents\backend-tracos\__tests__\unit\customersController.test.js</div><div class="suite-time">1.249s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Customers Controller &gt; Create Customer</div><div class="test-title">deve criar um novo cliente</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Customers Controller &gt; Create Customer</div><div class="test-title">deve retornar erro se o user_id não existir</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Customers Controller &gt; Update Customer</div><div class="test-title">deve atualizar um cliente existente</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Customers Controller &gt; Update Customer</div><div class="test-title">deve retornar erro se o cliente não existir</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Customers Controller &gt; Remove Customer</div><div class="test-title">deve desativar um cliente</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Customers Controller &gt; List Customers</div><div class="test-title">deve listar todos os clientes ativos</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div></div></details></main></body></html>

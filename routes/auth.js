@@ -19,4 +19,7 @@ router.route('/recovery-password').post(
   auth.recoveryPassword,
 );
 
+router.route('/update-password').post(
+  auth.updatePassword,
+);
 export default router;

@@ -1,34 +1,32 @@
-// models/Usuario.js
+// models/TattooArtists.js
 import { Model, DataTypes } from "sequelize";
 
-class User extends Model {
+class TattooArtists extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: {
-          type: DataTypes.STRING,
+        user_id: {
+          type: DataTypes.INTEGER,
+          references: {
+            model: 'Users', 
+            key: 'id'        
+          },
           allowNull: false,
+          onUpdate: 'CASCADE',
+          onDelete: 'CASCADE'
         },
-        email: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          unique: true,
-        },
-        password: {
-          type: DataTypes.STRING,
-          allowNull: false,
-        },
-        type: {
-          type: DataTypes.ENUM,
-          values: ['TATUADOR', 'CLIENTE'],
-          allowNull: false,
-        },
-        profile_photo: {
+        specialty: {
           type: DataTypes.STRING,
           allowNull: true,
         },
-        resetPasswordToken: DataTypes.STRING,
-        resetPasswordExpires: DataTypes.DATE,
+        experience: {
+          type: DataTypes.INTEGER,
+          allowNull: true,
+        },
+        tag_list: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
         createdAt: {
           type: DataTypes.DATE,
           allowNull: false,
@@ -50,4 +48,4 @@ class User extends Model {
   }
 }
 
-export default User;
+export default TattooArtists;
