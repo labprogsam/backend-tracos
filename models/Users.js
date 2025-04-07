@@ -23,9 +23,38 @@ class Users extends Model {
           values: ['TATUADOR', 'CLIENTE'],
           allowNull: false,
         },
-        profile_photo: {
+        profile_photo_url: {
           type: DataTypes.STRING,
           allowNull: true,
+        },
+        gender: {
+          type: DataTypes.STRING,
+          allowNull: true,
+            validate: {
+              isIn: [['Masculino', 'Feminino', 'Não-binário', 'Outro', 'Prefiro não dizer']]
+          }
+        },
+        instagram: {
+          type: DataTypes.STRING,
+          allowNull: true,
+        },
+        pinterest: {
+          type: DataTypes.STRING,
+          allowNull: true,
+          unique: true
+        },
+        bio: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
+        tags_interests: {
+          type: DataTypes.STRING,
+          allowNull: true
+        },
+        phone_number: {
+          type: DataTypes.STRING(13), // Número de telefone do tatuador, aceitando apenas inteiros, deverá ser feito tratamento de dados no back, validando se o parâmetro tem treze caracteres (Código de País + Código de Área + 9 dígitos)
+          allowNull: true,
+          unique: true,
         },
         resetPasswordToken: DataTypes.STRING,
         resetPasswordExpires: DataTypes.DATE,

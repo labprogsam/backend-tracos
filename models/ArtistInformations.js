@@ -23,13 +23,6 @@ class ArtistInformations extends Model {
           type: DataTypes.STRING(13),
           allowNull: false,
           unique: true,
-        },
-        gender: {
-          type: DataTypes.STRING,
-          allowNull: true,
-          validate: {
-            isIn: [['Masculino', 'Feminino', 'Não-binário', 'Outro', 'Prefiro não dizer']]
-        }
         },        
         zip_code: {
             type: DataTypes.STRING(8),
@@ -63,6 +56,27 @@ class ArtistInformations extends Model {
         type: DataTypes.STRING(11), 
         allowNull: false,
         unique: true,
+        },
+        rg: {
+          type: DataTypes.STRING(8), 
+          allowNull: false,
+          unique: true,
+        },
+        orgao_emissor:{
+          type: DataTypes.STRING, 
+          allowNull: true,
+        },
+        about_you: {
+          type: DataTypes.TEXT, 
+          allowNull: true,
+        },
+        identity_photos_url: {
+          type: DataTypes.TEXT, 
+          allowNull: false,
+        },
+        residency_proof_url: {
+          type: DataTypes.TEXT, 
+          allowNull: false,
         },
         isverified: {
         type: DataTypes.BOOLEAN, 

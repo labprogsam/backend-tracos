@@ -1,0 +1,2193 @@
+{
+	"info": {
+		"_postman_id": "0f8386c5-8732-4031-8fd4-ca4ae348250a",
+		"name": "Tracos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30491735",
+		"_collection_link": "https://educandus-team.postman.co/workspace/New-Team-Workspace~46abf5f9-f07f-48c6-9ba6-e768992abdd5/collection/30491735-0f8386c5-8732-4031-8fd4-ca4ae348250a?action=share&source=collection_link&creator=30491735"
+	},
+	"item": [
+		{
+			"name": "Autentication",
+			"item": [
+				{
+					"name": "LOGIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Token armazenado\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.environment.set(\"token\", responseJson.token); // Armazena o token em uma variável de ambiente\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"email\":\"{{email}}\",\r\n\"password\":\"senha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REFRESH TOKEN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Token armazenado\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.environment.set(\"token\", responseJson.token); // Armazena o token em uma variável de ambiente\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/refresh-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RECOVERY PASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"token\": \"{{token}}\",\r\n  \"password\": \"senha123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/recovery-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"recovery-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PASSWORD",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"tatuador@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/forgot-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"pm.environment.set(\"token\", responseJson.token);\r",
+									"pm.environment.set(\"userId\", responseJson.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Yasmim Sales\",\"email\": \"{{email}}\",\"password\":\"senha123\",\"confirmPassword\":\"senha123\",\"type\":\"CLIENTE\"}\r\n              ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Yasmim Adrieny\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tattoo Artists",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"pm.environment.set(\"tattoArtistId\", responseJson.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"user_id\": {{userId}},\r\n  \"specialty\": \"Realismo e coisas muito muito fofas\",\r\n  \"experience\": 8,\r\n  \"tag_list\": \"Realismo, Preto e Cinza, Retratos\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/tattoo-artists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tattoo-artists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"specialty\": \"Realismo e Coisas fofas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/tattoo-artists/{{tattoArtistId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tattoo-artists",
+								"{{tattoArtistId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/tattoo-artists?searchTerm={{search}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tattoo-artists"
+							],
+							"query": [
+								{
+									"key": "searchTerm",
+									"value": "{{search}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/tattoo-artists/{{tattoArtistId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tattoo-artists",
+								"{{tattoArtistId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"pm.environment.set(\"customerId\", responseJson.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"user_id\": {{userId}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\":{{userId}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/customers/{{customerId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"customers",
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/customers/{{customerId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"customers",
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									" pm.environment.set(\"bookingId\", responseJson.id);\r",
+									"});\r",
+									"var template = `\r",
+									"<style type=\"text/css\">\r",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+									"    .tftable tr {background-color:#ffffff;}\r",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+									"    .tftable tr:hover {background-color:#e0ffff;}\r",
+									"</style>\r",
+									"\r",
+									"<table class=\"tftable\" border=\"1\">\r",
+									"    <tr>\r",
+									"        <th>Error</th>\r",
+									"    </tr>\r",
+									"    <tr>\r",
+									"        <td>{{response}}</td>\r",
+									"    </tr>\r",
+									"</table>\r",
+									"`;\r",
+									"\r",
+									"function constructVisualizerPayload() {\r",
+									"    return { response: pm.response.text() }\r",
+									"}\r",
+									"\r",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "artist_id",
+									"value": "{{tattoArtistId}}",
+									"type": "text"
+								},
+								{
+									"key": "customer_id",
+									"value": "{{customerId}}",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "17",
+									"type": "text"
+								},
+								{
+									"key": "date_suggestion",
+									"value": "2025-04-10T15:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "authorization",
+									"type": "file",
+									"src": "postman-cloud:///1f01183d-fc45-47a0-9993-c77e205b4bf2"
+								},
+								{
+									"key": "references",
+									"type": "file",
+									"src": "postman-cloud:///1f01183d-fc45-47a0-9993-c77e205b4bf2"
+								},
+								{
+									"key": "message",
+									"value": "Gostaria de uma tatuagem detalhada no braço.",
+									"type": "text"
+								},
+								{
+									"key": "tatto_style",
+									"value": "Fine line",
+									"type": "text"
+								},
+								{
+									"key": "body_region",
+									"value": "braço",
+									"type": "text"
+								},
+								{
+									"key": "size",
+									"value": "big",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"artist_id\": {{tattoArtistId}},\r\n  \"customer_id\": {{customerId}},\r\n  \"date_time\": \"2025-04-10T15:00:00Z\",\r\n  \"taglist\": [\"realismo\", \"fineline\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/bookings/{{bookingId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"bookings",
+								"{{bookingId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/bookings?artist_id={{tattoArtistId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"bookings"
+							],
+							"query": [
+								{
+									"key": "artist_id",
+									"value": "{{tattoArtistId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/bookings/{{bookingId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"bookings",
+								"{{bookingId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									" pm.environment.set(\"notificationId\", responseJson.id);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"eita\",\r\n    \"description\":\"Fosse notificado\",\r\n    \"user_id\":{{userId}}\r\n}\r\n              ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/notifications",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"eita mulher\",\r\n    \"description\":\"Fosse notificado\",\r\n    \"user_id\":{{userId}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/notifications/{{notificationId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications",
+								"{{notificationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									" \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/notifications?user_id={{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/notifications/{{notificationId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications",
+								"{{notificationId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									" pm.environment.set(\"tagId\", responseJson.id);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Realismo\",\r\n    \"description\": \"Tatuagens que buscam replicar imagens com um alto grau de realismo.\"\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/tags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"  \r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Realismo top\",\r\n    \"description\": \"Tatuagens que buscam replicar imagens com um alto grau de realismo.\"\r\n    \r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/tags/{{tagId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tags",
+								"{{tagId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/tags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/tags/{{tagId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tags",
+								"{{tagId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									" pm.environment.set(\"reportId\", responseJson.id);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": " {{userId}}",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Atendimento inadequado",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "O tatuador não compareceu no horário marcado e não respondeu minhas mensagens.",
+									"type": "text"
+								},
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/C:/Users/Yasmim Sales/OneDrive/Imagens/Design sem nome (1).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/reports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Atendimento muito inadequado\",\r\n  \"description\": \"O tatuador não compareceu no horário marcado e não respondeu minhas mensagens.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/reports/{{reportId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"reports",
+								"{{reportId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/reports",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/reports/{{reportId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"reports",
+								"{{reportId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"pm.environment.set(\"imageId\", responseJson.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "artist_id",
+									"value": "{{tattoArtistId}}",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Minha nova tatuagem",
+									"type": "text"
+								},
+								{
+									"key": "tags",
+									"value": "realismo,blackwork",
+									"type": "text"
+								},
+								{
+									"key": "portfolio_index",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "is_featured",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "imageFile",
+									"type": "file",
+									"src": "postman-cloud:///1f01183d-fc45-47a0-9993-c77e205b4bf2"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/images",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									" \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "Uma tatuagem muitooooo incrível!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/images/{{imageId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"images",
+								"{{imageId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									" \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/images?artist_id={{tattoArtistId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"images"
+							],
+							"query": [
+								{
+									"key": "artist_id",
+									"value": "{{tattoArtistId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/images/{{imageId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"images",
+								"{{imageId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Artist Informations",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"pm.environment.set(\"artistInformationsID\", responseJson.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "artist_id",
+									"value": "{{tattoArtistId}}",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Tatuador especializado em realismo e blackwork, atuando há mais de 10 anos.",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "{{telefone}}",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Masculino",
+									"type": "text"
+								},
+								{
+									"key": "zip_code",
+									"value": "01001000",
+									"type": "text"
+								},
+								{
+									"key": "street",
+									"value": "Avenida Paulista",
+									"type": "text"
+								},
+								{
+									"key": "neighborhood",
+									"value": "Bela Vista",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "São Paulo",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "SP",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": "{{cpf}}",
+									"type": "text"
+								},
+								{
+									"key": "addressComplement",
+									"value": "SAL 108",
+									"type": "text"
+								},
+								{
+									"key": "rg",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "orgao_emissor",
+									"value": "SDS",
+									"type": "text"
+								},
+								{
+									"key": "about_you",
+									"value": "Alguma coisa",
+									"type": "text"
+								},
+								{
+									"key": "identity_photos",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1f01183d-fc45-47a0-9993-c77e205b4bf2",
+										"postman-cloud:///1f01183d-fc5b-4730-ac7b-51cffd590e62"
+									]
+								},
+								{
+									"key": "residency_proof",
+									"type": "file",
+									"src": "postman-cloud:///1f01183d-fc5b-4730-ac7b-51cffd590e62"
+								},
+								{
+									"key": "number",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/artist-information",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"artist-information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"pm.environment.set(\"artistInformationsID\", responseJson.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "artist_id",
+									"value": "{{tattoArtistId}}",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Tatuador especializado em realismo e blackwork, atuando há mais de 10 anos.",
+									"type": "text"
+								},
+								{
+									"key": "phone_number",
+									"value": "{{telefone}}",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "Masculino",
+									"type": "text"
+								},
+								{
+									"key": "zip_code",
+									"value": "01001000",
+									"type": "text"
+								},
+								{
+									"key": "street",
+									"value": "Avenida Paulista",
+									"type": "text"
+								},
+								{
+									"key": "neighborhood",
+									"value": "Bela Vista",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "São Paulo",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "SP",
+									"type": "text"
+								},
+								{
+									"key": "cpf",
+									"value": "{{cpf}}",
+									"type": "text"
+								},
+								{
+									"key": "addressComplement",
+									"value": "SAL 108",
+									"type": "text"
+								},
+								{
+									"key": "rg",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "orgao_emissor",
+									"value": "SDS",
+									"type": "text"
+								},
+								{
+									"key": "about_you",
+									"value": "Alguma coisa",
+									"type": "text"
+								},
+								{
+									"key": "identity_photos",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1f01183d-fc45-47a0-9993-c77e205b4bf2",
+										"postman-cloud:///1f01183d-fc5b-4730-ac7b-51cffd590e62"
+									]
+								},
+								{
+									"key": "residency_proof",
+									"type": "file",
+									"src": "postman-cloud:///1f01183d-fc5b-4730-ac7b-51cffd590e62"
+								},
+								{
+									"key": "number",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/artist-information/{{artistInformationsID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"artist-information",
+								"{{artistInformationsID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									" \r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/artist-information",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"artist-information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/artist-information/{{artistInformationsID}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"artist-information",
+								"{{artistInformationsID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "authToken",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

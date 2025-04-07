@@ -58,6 +58,10 @@ module.exports = {
       type: Sequelize.TEXT,
       allowNull: true
     },
+    authorization: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
     status: {
       type: Sequelize.STRING,
       allowNull: false,

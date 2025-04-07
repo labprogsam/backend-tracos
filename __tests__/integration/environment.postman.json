@@ -1,0 +1,99 @@
+{
+	"id": "a6706ac6-27ce-478d-8eeb-97fed4d993b4",
+	"name": "Dados",
+	"values": [
+		{
+			"key": "email",
+			"value": "t17@gmail.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "cpf",
+			"value": "10131057456",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "telefone",
+			"value": "5587991942631",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "tattoArtistId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "search",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "customerId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "bookingId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "tagId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "artistInformationsID",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "reportId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "notificationId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "imageId",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "authToken",
+			"value": "",
+			"type": "any",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2025-04-05T14:28:52.919Z",
+	"_postman_exported_using": "Postman/11.39.4"
+}

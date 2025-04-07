@@ -6,7 +6,7 @@ export default {
     userNotFound: 'User Not Found',
     userDisabled: 'User Disabled',
     wrongPassword: 'Wrong Password',
-    confirmPassword: "Password and password confirmation do not match",
+    confirmPassword: 'Password and password confirmation do not match',
     userNotFound: "User not found",
     invalidType: "Invalid type. Try 'TATUADOR' or 'CLIENTE'",
     internalError: "Internal server error",
@@ -43,7 +43,9 @@ export default {
         NOT_FOUND: "Reserva não encontrada.",
         DELETED_SUCCESS: "Reserva deletada com sucesso.",
         INVALID_STATUS: "Status inválido." ,
-        MISSING_FIELDS: "Campos obrigatórios, não preenchidos"
+        MISSING_FIELDS: "Campos obrigatórios, não preenchidos",
+        AUTHORIZATION_REQUIRED: 'Menores de idade devem fornecer autorização.',
+        
       },
       TATTOO_ARTISTS: {
         NOT_FOUND: "Tatuador não encontrado.",

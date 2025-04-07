@@ -143,7 +143,7 @@ describe('TattooArtists Controller', () => {
   
       sinon.assert.calledOnce(queryStub);
       expect(res.status.calledWith(500)).toBe(true);
-      expect(res.json.calledWith({ error: 'Erro ao listar artistas de tatuagem' })).toBe(true);
+      expect(res.json.calledWith({ error: 'Nenhum artista encontrado' })).toBe(true);
     });
   });
   

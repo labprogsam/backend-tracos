@@ -57,6 +57,10 @@ class Bookings extends Model {
             type: DataTypes.TEXT,
             allowNull: true,
           },
+          authorization: {
+            type: DataTypes.STRING,
+            allowNull: true
+          },
           status: {
             type: DataTypes.STRING,
             allowNull: true,

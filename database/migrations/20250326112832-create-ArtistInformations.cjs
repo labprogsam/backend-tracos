@@ -16,22 +16,6 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE'
     },
-    description: {
-      type: Sequelize.STRING(500),
-      allowNull: true, // Pode ser vazio, caso o Tatuador não queira adicionar uma bio
-    },
-    phone_number: {
-      type: Sequelize.STRING(13), // Número de telefone do tatuador, aceitando apenas inteiros, deverá ser feito tratamento de dados no back, validando se o parâmetro tem treze caracteres (Código de País + Código de Área + 9 dígitos)
-      allowNull: false,
-      unique: true,
-    },
-    gender: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      validate: {
-        isIn: [['Masculino', 'Feminino', 'Não-binário', 'Outro', 'Prefiro não dizer']]
-      }
-    },
     zip_code: {
       type: Sequelize.STRING(8), // Número do CEP do tatuador, aceitando apenas inteiros, deverá ser feito tratamento de dados no back, validando se o parâmetro tem oito caracteres
       allowNull: false,
@@ -65,10 +49,40 @@ module.exports = {
       allowNull: false,
       unique: true,
     },
+    rg: {
+      type: Sequelize.STRING(8), 
+      allowNull: false,
+      unique: true,
+    },
+    orgao_emissor:{
+      type: Sequelize.STRING, 
+      allowNull: true,
+    },
+    description:{
+      type: Sequelize.STRING, 
+      allowNull: true,
+    },
+    about_you: {
+      type: Sequelize.TEXT, 
+      allowNull: true,
+    },
     isverified: {
       type: Sequelize.BOOLEAN, 
       allowNull: false,
       defaultValue: false, // Valor padrão definido
+    },
+    phone_number: {
+              type: Sequelize.STRING(13), // Número de telefone do tatuador, aceitando apenas inteiros, deverá ser feito tratamento de dados no back, validando se o parâmetro tem treze caracteres (Código de País + Código de Área + 9 dígitos)
+              allowNull: true,
+              unique: true,
+            },
+    identity_photos_url: {
+      type: Sequelize.TEXT, 
+      allowNull: false,
+    },
+    residency_proof_url: {
+      type: Sequelize.TEXT, 
+      allowNull: false,
     },
     createdAt: {
       type: Sequelize.DATE,

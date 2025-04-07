@@ -111,7 +111,7 @@ const result = await pool.query(query, [`%${searchTerm}%`]);
     // Retornando os resultados
     res.status(200).json(result.rows);  // `result.rows` contém os registros retornados pela query
   } catch (err) {
-    res.status(500).json({ error: 'Erro ao listar artistas de tatuagem' });
+    res.status(500).json({ error: 'Nenhum artista encontrado' });
   }
 }
 
