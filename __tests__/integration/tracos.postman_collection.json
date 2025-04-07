@@ -8,6 +8,111 @@
 	},
 	"item": [
 		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "CREATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"pm.environment.set(\"token\", responseJson.token);\r",
+									"pm.environment.set(\"userId\", responseJson.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Yasmim Sales\",\"email\": \"{{email}}\",\"password\":\"senha123\",\"confirmPassword\":\"senha123\",\"type\":\"CLIENTE\"}\r\n              ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Sucesso\", function() {\r",
+									"  const responseJson = pm.response.json();\r",
+									" // Salva vários valores importantes\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"Yasmim Adrieny\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Autentication",
 			"item": [
 				{
@@ -164,157 +269,7 @@
 			]
 		},
 		{
-			"name": "Users",
-			"item": [
-				{
-					"name": "CREATE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Sucesso\", function() {\r",
-									"  const responseJson = pm.response.json();\r",
-									" // Salva vários valores importantes\r",
-									"pm.environment.set(\"token\", responseJson.token);\r",
-									"pm.environment.set(\"userId\", responseJson.id);\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"name\":\"Yasmim Sales\",\"email\": \"{{email}}\",\"password\":\"senha123\",\"confirmPassword\":\"senha123\",\"type\":\"CLIENTE\"}\r\n              ",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8000/users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UPDATE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"\r",
-									"\r",
-									"pm.test(\"Sucesso\", function() {\r",
-									"  const responseJson = pm.response.json();\r",
-									" // Salva vários valores importantes\r",
-									"\r",
-									"});\r",
-									""
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\"name\":\"Yasmim Adrieny\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8000/users/{{userId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"users",
-								"{{userId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DELETE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Sucesso\", function() {\r",
-									"    if (pm.response.code === 204) {\r",
-									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
-									"    } else {\r",
-									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
-									"    }\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8000/users/{{userId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"users",
-								"{{userId}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Tattoo Artists",
+			"name": "Corpo",
 			"item": [
 				{
 					"name": "CREATE",
@@ -472,56 +427,6 @@
 					"response": []
 				},
 				{
-					"name": "DELETE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Sucesso\", function() {\r",
-									"    if (pm.response.code === 204) {\r",
-									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
-									"    } else {\r",
-									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
-									"    }\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8000/tattoo-artists/{{tattoArtistId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"tattoo-artists",
-								"{{tattoArtistId}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Customers",
-			"item": [
-				{
 					"name": "CREATE",
 					"event": [
 						{
@@ -664,56 +569,6 @@
 					"response": []
 				},
 				{
-					"name": "DELETE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Sucesso\", function() {\r",
-									"    if (pm.response.code === 204) {\r",
-									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
-									"    } else {\r",
-									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
-									"    }\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8000/customers/{{customerId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"customers",
-								"{{customerId}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Bookings",
-			"item": [
-				{
 					"name": "CREATE",
 					"event": [
 						{
@@ -792,12 +647,12 @@
 								{
 									"key": "authorization",
 									"type": "file",
-									"src": "postman-cloud:///1f01183d-fc45-47a0-9993-c77e205b4bf2"
+									"src": "__tests__/integration/download.jpg"
 								},
 								{
 									"key": "references",
 									"type": "file",
-									"src": "postman-cloud:///1f01183d-fc45-47a0-9993-c77e205b4bf2"
+									"src": "__tests__/integration/download.jpg"
 								},
 								{
 									"key": "message",
@@ -933,56 +788,6 @@
 					},
 					"response": []
 				},
-				{
-					"name": "DELETE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Sucesso\", function() {\r",
-									"    if (pm.response.code === 204) {\r",
-									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
-									"    } else {\r",
-									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
-									"    }\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8000/bookings/{{bookingId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"bookings",
-								"{{bookingId}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Notifications",
-			"item": [
 				{
 					"name": "CREATE",
 					"event": [
@@ -1139,56 +944,6 @@
 					"response": []
 				},
 				{
-					"name": "DELETE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Sucesso\", function() {\r",
-									"    if (pm.response.code === 204) {\r",
-									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
-									"    } else {\r",
-									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
-									"    }\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8000/notifications/{{notificationId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"notifications",
-								"{{notificationId}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Tags",
-			"item": [
-				{
 					"name": "CREATE",
 					"event": [
 						{
@@ -1332,56 +1087,6 @@
 					},
 					"response": []
 				},
-				{
-					"name": "DELETE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Sucesso\", function() {\r",
-									"    if (pm.response.code === 204) {\r",
-									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
-									"    } else {\r",
-									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
-									"    }\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8000/tags/{{tagId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"tags",
-								"{{tagId}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Reports",
-			"item": [
 				{
 					"name": "CREATE",
 					"event": [
@@ -1542,56 +1247,6 @@
 					"response": []
 				},
 				{
-					"name": "DELETE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Sucesso\", function() {\r",
-									"    if (pm.response.code === 204) {\r",
-									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
-									"    } else {\r",
-									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
-									"    }\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8000/reports/{{reportId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"reports",
-								"{{reportId}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Images",
-			"item": [
-				{
 					"name": "CREATE",
 					"event": [
 						{
@@ -1652,7 +1307,7 @@
 								{
 									"key": "imageFile",
 									"type": "file",
-									"src": "postman-cloud:///1f01183d-fc45-47a0-9993-c77e205b4bf2"
+									"src": "__tests__/integration/download.jpg"
 								}
 							]
 						},
@@ -1770,56 +1425,6 @@
 					"response": []
 				},
 				{
-					"name": "DELETE",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Sucesso\", function() {\r",
-									"    if (pm.response.code === 204) {\r",
-									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
-									"    } else {\r",
-									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
-									"    }\r",
-									"    pm.response.to.have.status(204);\r",
-									"});"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "token",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8000/images/{{imageId}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"images",
-								"{{imageId}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Artist Informations",
-			"item": [
-				{
 					"name": "CREATE",
 					"event": [
 						{
@@ -1925,16 +1530,14 @@
 								{
 									"key": "identity_photos",
 									"type": "file",
-									"src": [
-										"postman-cloud:///1f01183d-fc45-47a0-9993-c77e205b4bf2",
-										"postman-cloud:///1f01183d-fc5b-4730-ac7b-51cffd590e62"
-									]
-								},
-								{
-									"key": "residency_proof",
+									"src": "__tests__/integration/download.jpg"
+								  },
+								  {
+									"key": "identity_photos",
 									"type": "file",
-									"src": "postman-cloud:///1f01183d-fc5b-4730-ac7b-51cffd590e62"
-								},
+									"src":["__tests__/integration/download.jpg", "__tests__/integration/download.jpg"] 
+								  },
+							
 								{
 									"key": "number",
 									"value": "2",
@@ -2063,14 +1666,14 @@
 									"key": "identity_photos",
 									"type": "file",
 									"src": [
-										"postman-cloud:///1f01183d-fc45-47a0-9993-c77e205b4bf2",
-										"postman-cloud:///1f01183d-fc5b-4730-ac7b-51cffd590e62"
+										"__tests__/integration/download.jpg",
+										"__tests__/integration/download.jpg"
 									]
 								},
 								{
 									"key": "residency_proof",
 									"type": "file",
-									"src": "postman-cloud:///1f01183d-fc5b-4730-ac7b-51cffd590e62"
+									"src": "__tests__/integration/download.jpg"
 								},
 								{
 									"key": "number",
@@ -2134,6 +1737,191 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "DELETS",
+			"item": [
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/bookings/{{bookingId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"bookings",
+								"{{bookingId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/notifications/{{notificationId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"notifications",
+								"{{notificationId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/images/{{imageId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"images",
+								"{{imageId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/reports/{{reportId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"reports",
+								"{{reportId}}"
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "DELETE",
@@ -2175,6 +1963,186 @@
 							"path": [
 								"artist-information",
 								"{{artistInformationsID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/tattoo-artists/{{tattoArtistId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tattoo-artists",
+								"{{tattoArtistId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/customers/{{customerId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"customers",
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/tags/{{tagId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"tags",
+								"{{tagId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Sucesso\", function() {\r",
+									"    if (pm.response.code === 204) {\r",
+									"        console.log(\"✅ DELETE executado com sucesso (204 No Content)\");\r",
+									"    } else {\r",
+									"        console.log(`❌ Status inesperado: ${pm.response.code}`);\r",
+									"    }\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/users/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"{{userId}}"
 							]
 						}
 					},
